@@ -1,0 +1,15 @@
+streamlit
+numpy
+deepface
+pandas
+scikit-learn
+plotly
+joblib
+st-aggrid
+opencv-python
+langdetect
+googletrans==4.0.0-rc1
+textblob
+transformers
+Pillow
+torch
