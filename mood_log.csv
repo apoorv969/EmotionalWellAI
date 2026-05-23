@@ -106,484 +106,365 @@ timestamp,emotion,confidence,text,user,source,platform
 तो मेरा पहला काम तुम्हें
 पहचानने से इंकार होगा !",Guest,text,streamlit
 2026-03-15 16:18:59.918144,happy,0.5425899950715296,,Guest,voice,streamlit
-2026-03-19 09:24:14.211196,happy,0.99,i am feeling happy,Guest,text,streamlit
-2026-03-19 09:24:34.596660,sad,0.8,life is too short,Guest,text,streamlit
-2026-03-21 09:20:46.125294,sad,0.97,"There are moments when I wish I could roll back the clock and take all the sadness away, but I have the feeling that if I did, the joy would be gone as well."" —Nicholas Sparks",Guest,text,streamlit
-2026-03-21 09:26:26.058939,neutral,0.81,Life's under no obligation to give us what we expect,Guest,text,streamlit
-2026-03-21 09:36:41.964325,sad,0.97,"There are moments when I wish I could roll back the clock and take all the sadness away, but I have the feeling that if I did, the joy would be gone as well."" —Nicholas Sparks",Guest,text,streamlit
-2026-03-21 09:46:39.108587,sad,0.97,"There are moments when I wish I could roll back the clock and take all the sadness away, but I have the feeling that if I did, the joy would be gone as well."" —Nicholas Sparks.",Guest,text,streamlit
-2026-03-21 10:00:42.618491,sad,0.97,"There are moments when I wish I could roll back the clock and take all the sadness away, but I have the feeling that if I did, the joy would be gone as well."" —Nicholas Sparks.",Guest,text,streamlit
-Guest,sad,0.98,"कर रहा था ग़म-ए-जहाँ का हिसाब
-आज तुम याद बे-हिसाब आए
-",text,streamlit,2026-04-05 14:06:14.481270
-Guest,sad,0.64,The application is not working correctly now,text,streamlit,2026-04-05 14:26:34.740824
-Guest,sad,0.74,life is tough,text,streamlit,2026-04-05 14:58:55.379794
-2026-05-02 11:46:32.489359,happy,90.83,face_input,Apoorv Mittal,,
-2026-05-02 11:46:43.922321,fearful,62.57,face_input,Apoorv Mittal,,
-2026-05-02 11:46:57.203098,happy,53.08,face_input,Apoorv Mittal,,
-2026-05-02 11:47:59.059280,neutral,79.01,text_input,Alok Mittal,,
-2026-05-02 11:48:35.414835,fearful,87.01,text_input,Alok Mittal,,
-2026-05-02 11:49:30.374350,happy,100.0,face_input,Puja Gupta,,
-2026-05-02 11:49:30.789911,fearful,87.01,text_input,Puja Gupta,,
-2026-05-02 11:49:46.015371,happy,69.49,voice_input,Puja Gupta,,
-2026-05-02 11:49:46.071263,happy,56.49666666666667,fusion_input,Puja Gupta,,
-2026-05-02 11:55:09.189593,happy,89.72,face_input,Guest,,
-2026-05-02 11:55:34.909651,happy,99.88,face_input,Apoorv Mittal,,
-2026-05-02 11:56:09.723652,fearful,98.26,text_input,Apoorv Mittal,,
-2026-05-02 11:56:30.279923,fearful,79.84,face_input,Guest,,
-2026-05-02 11:57:27.299392,surprised,100.0,face_input,Puja Gupta,,
-2026-05-02 11:57:49.129189,sad,100.0,face_input,Puja Gupta,,
-2026-05-02 11:58:29.087430,surprised,100.0,face_input,Puja Gupta,,
-2026-05-02 12:03:46.267613,surprised,99.99,face_input,Guest,,
-2026-05-02 12:04:02.392150,angry,50.08,face_input,Guest,,
-2026-05-02 12:04:18.007215,fearful,79.91,face_input,Guest,,
-2026-05-02 12:04:38.802765,happy,99.0,face_input,Apoorv Mittal,,
-2026-05-02 12:05:03.558890,happy,99.99,face_input,Apoorv Mittal,,
-2026-05-02 12:05:17.523092,happy,99.99,face_input,Puja Gupta,,
-2026-05-02 12:05:26.147782,angry,97.34,face_input,Puja Gupta,,
-2026-05-02 12:05:44.878784,happy,96.06,face_input,Puja Gupta,,
-2026-05-02 12:06:12.648427,happy,96.06,face_input,Apoorv Mittal,,
-2026-05-02 12:07:03.819847,disgust,59.5,voice_input,Guest,,
-2026-05-02 12:07:26.774782,disgust,59.5,voice_input,Puja Gupta,,
-2026-05-02 12:07:40.117036,fear,35.89,voice_input,Puja Gupta,,
-2026-05-02 12:08:04.646357,fear,33.0,voice_input,Puja Gupta,,
-2026-05-02 12:08:39.275078,surprise,59.87,voice_input,Alok Mittal,,
-2026-05-02 12:13:18.786816,happy,50.43,face_input,Guest,,
-2026-05-02 12:13:19.537146,neutral,70.25,text_input,Guest,,
-2026-05-02 12:13:20.216315,fear,35.89,voice_input,Guest,,
-2026-05-02 12:13:20.248698,happy,25.215,fusion_input,Guest,,
-2026-05-02 12:21:48.454135,happy,99.62,face_input,Guest,,
-2026-05-02 12:21:58.745639,neutral,75.62,face_input,Guest,,
-2026-05-02 12:22:09.799869,neutral,61.35,face_input,Guest,,
-2026-05-02 12:22:17.746707,fearful,80.11,face_input,Guest,,
-2026-05-02 13:16:31.127351,happy,83.22,text_input,Guest,,
-2026-05-02 13:16:45.464418,neutral,47.61,face_input,Guest,,
-2026-05-02 13:18:59.633761,happy,32.81,face_input,Guest,,
-2026-05-02 13:19:00.108833,fearful,99.46,text_input,Guest,,
-2026-05-02 13:19:00.164098,fearful,49.73,fusion_input,Guest,,
-2026-05-02 13:19:14.426147,sad,80.18,face_input,Guest,,
-2026-05-02 13:19:45.898488,happy,91.87,text_input,Guest,,
-2026-05-02 13:20:58.687560,fear,55.39,voice_input,Guest,,
-2026-05-02 16:37:10.898070,happy,79.85,face_input,Guest,,
-2026-05-02 16:38:02.514161,angry,98.35,face_input,Alok Mittal,,
-2026-05-02 16:38:29.463830,fearful,51.12,face_input,Alok Mittal,,
-2026-05-02 16:39:05.100758,fearful,66.18,face_input,Alok Mittal,,
-2026-05-02 16:41:01.226902,fearful,47.51,text_input,Puja Gupta,,
-2026-05-02 16:41:49.604281,fearful,93.48,text_input,Alok Mittal,,
-2026-05-02 16:42:32.509769,neutral,51.89,text_input,Apoorv Mittal,,
-2026-05-02 16:44:12.154894,angry,45.08,face_input,Apoorv Mittal,,
-2026-05-02 16:44:12.562034,neutral,51.89,text_input,Apoorv Mittal,,
-2026-05-02 16:44:20.698467,fear,84.74,voice_input,Apoorv Mittal,,
-2026-05-02 16:44:20.716465,fear,42.37,fusion_input,Apoorv Mittal,,
-2026-05-02 16:44:53.537596,happy,87.93,face_input,Apoorv Mittal,,
-2026-05-02 16:44:54.231507,neutral,51.89,text_input,Apoorv Mittal,,
-2026-05-02 16:44:54.882925,fear,84.74,voice_input,Apoorv Mittal,,
-2026-05-02 16:44:54.895753,happy,43.965,fusion_input,Apoorv Mittal,,
-2026-05-02 16:45:27.702355,sad,67.92,face_input,Puja Gupta,,
-2026-05-02 16:45:39.333217,sad,67.92,face_input,Puja Gupta,,
-2026-05-02 16:45:53.185149,happy,99.0,face_input,Puja Gupta,,
-2026-05-02 16:47:29.107790,neutral,43.49,text_input,Puja Gupta,,
-2026-05-02 16:47:54.560323,fearful,93.36,text_input,Puja Gupta,,
-2026-05-02 16:48:21.329203,surprised,96.31,text_input,Puja Gupta,,
-2026-05-02 16:49:25.805260,fear,47.41,voice_input,Apoorv Mittal,,
-2026-05-02 16:51:45.480197,happy,96.06,face_input,Guest,,
-2026-05-02 16:52:05.978881,neutral,97.41,face_input,Guest,,
-2026-05-02 16:52:14.394629,angry,50.08,face_input,Guest,,
-2026-05-02 16:53:08.738848,happy,99.0,face_input,Guest,,
-2026-05-02 16:53:41.860766,surprised,99.99,face_input,Guest,,
-2026-05-02 16:54:19.330017,surprised,99.99,face_input,Puja Gupta,,
-2026-05-02 16:54:49.052261,happy,99.99,face_input,Puja Gupta,,
-2026-05-02 16:56:39.808452,angry,97.34,face_input,Puja Gupta,,
-2026-05-02 16:58:52.403926,angry,97.34,face_input,Apoorv Mittal,,
-2026-05-02 16:59:21.143899,happy,99.99,face_input,Apoorv Mittal,,
-2026-05-02 16:59:44.820421,happy,96.06,face_input,Apoorv Mittal,,
-2026-05-02 16:59:57.320169,fearful,79.91,face_input,Apoorv Mittal,,
-2026-05-02 17:00:06.214043,angry,50.08,face_input,Apoorv Mittal,,
-2026-05-02 20:12:35.849252,happy,87.66,face_input,Guest,,
-2026-05-02 20:12:43.474043,happy,99.77,face_input,Guest,,
-2026-05-02 20:12:51.456097,angry,59.29,face_input,Guest,,
-2026-05-02 20:12:56.967536,happy,57.59,face_input,Guest,,
-2026-05-02 20:13:03.406308,sad,96.71,face_input,Guest,,
-2026-05-02 20:13:15.087134,sad,64.52,face_input,Guest,,
-2026-05-02 20:14:47.421846,sad,96.64,face_input,Guest,,
-2026-05-02 20:14:48.690298,happy,90.05,text_input,Guest,,
-2026-05-02 20:14:55.672907,neutral,57.35,voice_input,Guest,,
-2026-05-02 20:14:55.794594,sad,48.32,fusion_input,Guest,,
-2026-05-02 20:15:38.747632,happy,73.25,face_input,Guest,,
-2026-05-02 20:16:11.549488,fearful,65.92,face_input,Guest,,
-2026-05-03 10:01:53.376688,neutral,38.19,face_input,Guest,,
-2026-05-03 10:03:16.526285,neutral,56.65,text_input,Apoorv Mittal,,
-2026-05-03 10:08:37.975950,fearful,79.91,face_input,Apoorv Mittal,,
-2026-05-03 10:08:50.551612,surprised,99.99,face_input,Apoorv Mittal,,
-2026-05-03 10:09:49.130899,fear,24.64,voice_input,Apoorv Mittal,,
-2026-05-03 10:15:41.316446,neutral,97.41,face_input,Apoorv Mittal,,
-2026-05-03 10:15:55.351703,neutral,99.51,face_input,Apoorv Mittal,,
-2026-05-03 10:17:33.419398,neutral,68.36,face_input,Puja Gupta,,
-2026-05-03 10:19:14.380216,neutral,53.26,face_input,Guest,,
-2026-05-03 10:22:03.219456,happy,87.39,face_input,Alok Mittal,,
-2026-05-03 10:22:12.935706,neutral,59.75,face_input,Alok Mittal,,
-2026-05-03 10:22:24.035233,angry,88.59,face_input,Alok Mittal,,
-2026-05-03 10:22:33.751825,neutral,53.39,face_input,Alok Mittal,,
-2026-05-03 10:22:40.114721,neutral,90.79,face_input,Alok Mittal,,
-2026-05-03 10:22:50.186258,angry,70.3,face_input,Alok Mittal,,
-2026-05-03 10:22:56.276528,neutral,76.33,face_input,Alok Mittal,,
-2026-05-03 10:24:57.336127,happy,67.36,face_input,Guest,,
-2026-05-03 10:24:58.053313,neutral,45.79,text_input,Guest,,
-2026-05-03 10:24:59.588661,disgust,77.73,voice_input,Guest,,
-2026-05-03 10:24:59.635063,disgust,38.865,fusion_input,Guest,,
-2026-05-03 10:26:00.935261,disgust,77.73,voice_input,Guest,,
-2026-05-03 10:26:42.658545,surprise,75.76,voice_input,Guest,,
-2026-05-03 10:26:53.820950,neutral,65.81,voice_input,Guest,,
-2026-05-03 10:28:04.430360,fear,58.26,voice_input,Puja Gupta,,
-2026-05-03 10:28:33.891670,surprise,54.66,voice_input,Puja Gupta,,
-2026-05-03 10:28:52.034659,fear,37.33,voice_input,Puja Gupta,,
-2026-05-03 22:55:55.651814,fearful,79.91,face_input,Alok Mittal,,
-2026-05-03 22:56:21.526258,angry,50.08,face_input,Alok Mittal,,
-2026-05-03 23:11:59.629143,fearful,58.06,face_input,Alok Mittal,,
-2026-05-03 23:12:11.414649,angry,72.56,face_input,Alok Mittal,,
-2026-05-03 23:13:11.482667,neutral,92.62,face_input,Guest,,
-2026-05-03 23:13:21.889439,surprised,44.6,face_input,Guest,,
-2026-05-03 23:13:29.426132,happy,99.96,face_input,Guest,,
-2026-05-03 23:13:34.555641,fearful,72.93,face_input,Guest,,
-2026-05-03 23:14:24.466259,angry,99.61,face_input,Guest,,
-2026-05-03 23:14:29.248628,angry,99.0,face_input,Guest,,
-2026-05-03 23:14:35.839749,angry,65.7,face_input,Guest,,
-2026-05-03 23:14:39.820972,surprised,48.47,face_input,Guest,,
-2026-05-03 23:14:45.030942,fearful,49.93,face_input,Guest,,
-2026-05-03 23:14:49.330376,fearful,86.74,face_input,Guest,,
-2026-05-03 23:35:59.526588,neutral,85.98,face_input,Guest,,
-2026-05-03 23:36:07.871188,surprised,85.54,face_input,Guest,,
-2026-05-03 23:36:15.817225,surprised,86.25,face_input,Guest,,
-2026-05-03 23:36:30.199692,sad,57.17,face_input,Guest,,
-2026-05-03 23:38:04.273326,sad,93.93,face_input,Guest,,
-2026-05-03 23:39:25.400285,sad,62.52,face_input,Guest,,
-2026-05-03 23:39:36.759124,angry,99.62,face_input,Guest,,
-2026-05-03 23:39:47.499415,angry,99.88,face_input,Guest,,
-2026-05-03 23:39:59.256452,angry,72.56,face_input,Guest,,
-2026-05-03 23:40:47.844321,disgusted,87.36,text_input,Guest,,
-2026-05-04 15:06:58.973324,happy,80.22,face_input,Guest,,
-2026-05-04 15:08:38.278592,angry,96.75,face_input,Guest,,
-2026-05-04 15:08:48.967586,angry,99.2,face_input,Guest,,
-2026-05-04 15:09:01.060585,happy,99.99,face_input,Guest,,
-2026-05-04 15:09:53.288258,neutral,31.13,face_input,Guest,,
-2026-05-04 15:10:02.513328,happy,34.47,face_input,Guest,,
-2026-05-04 15:12:13.962842,neutral,37.21,face_input,Guest,,
-2026-05-04 15:12:23.116440,neutral,77.92,face_input,Guest,,
-2026-05-04 15:12:42.366345,angry,99.32,face_input,Guest,,
-2026-05-04 15:13:00.281041,angry,81.57,face_input,Guest,,
-2026-05-04 15:13:09.392642,angry,98.52,face_input,Guest,,
-2026-05-04 15:13:14.639361,angry,98.48,face_input,Guest,,
-2026-05-04 15:13:20.347693,angry,97.89,face_input,Guest,,
-2026-05-04 15:13:55.755987,happy,100.0,face_input,Guest,,
-2026-05-04 15:15:59.259265,happy,60.16,face_input,Apoorv Mittal,,
-2026-05-04 15:16:00.083079,disgusted,93.72,text_input,Apoorv Mittal,,
-2026-05-04 15:16:02.185742,neutral,65.81,voice_input,Apoorv Mittal,,
-2026-05-04 15:16:02.278581,disgusted,46.86,fusion_input,Apoorv Mittal,,
-2026-05-04 15:16:48.646411,happy,60.16,face_input,Apoorv Mittal,,
-2026-05-04 15:16:49.080187,disgusted,93.72,text_input,Apoorv Mittal,,
-2026-05-04 15:16:50.782605,surprise,48.38,voice_input,Apoorv Mittal,,
-2026-05-04 15:16:50.820485,disgusted,31.24,fusion_input,Apoorv Mittal,,
-2026-05-04 15:19:18.779698,sad,62.52,face_input,Apoorv Mittal,,
-2026-05-04 15:20:00.094459,fearful,58.06,face_input,Guest,,
-2026-05-04 15:23:59.205665,neutral,98.87,face_input,Guest,,
-2026-05-04 15:24:10.587140,sad,29.42,face_input,Guest,,
-2026-05-04 15:25:01.286508,disgust,77.73,voice_input,Alok Mittal,,
-2026-05-04 15:25:20.654699,surprise,51.41,voice_input,Alok Mittal,,
-2026-05-04 15:26:08.094286,surprise,40.95,voice_input,Alok Mittal,,
-2026-05-04 15:27:43.982653,sad,87.45,face_input,Apoorv Mittal,,
-2026-05-04 15:29:27.015233,happy,62.52,face_input,Guest,,
-2026-05-05 14:10:08.954659,neutral,85.98,face_input,Guest,,
-2026-05-05 14:13:47.800769,neutral,99.21,face_input,Guest,,
-2026-05-05 14:13:57.936324,neutral,99.97,face_input,Guest,,
-2026-05-05 14:14:06.383487,happy,73.76,face_input,Guest,,
-2026-05-05 14:14:14.549870,neutral,99.96,face_input,Guest,,
-2026-05-05 14:14:21.552199,neutral,99.24,face_input,Guest,,
-2026-05-05 14:15:59.371232,angry,66.67,face_input,Guest,,
-2026-05-05 14:16:09.566529,fearful,52.31,face_input,Guest,,
-2026-05-05 14:16:26.941542,happy,99.84,face_input,Guest,,
-2026-05-05 14:16:34.837292,surprised,91.29,face_input,Guest,,
-2026-05-05 14:16:48.297061,happy,100.0,face_input,Guest,,
-2026-05-05 14:16:53.268647,happy,100.0,face_input,Guest,,
-2026-05-05 14:16:58.101584,happy,70.85,face_input,Guest,,
-2026-05-05 22:25:18.260810,angry,99.78,face_input,Guest,,
-2026-05-05 22:25:25.823384,angry,99.75,face_input,Guest,,
-2026-05-05 22:25:32.364084,angry,87.48,face_input,Guest,,
-2026-05-05 22:25:36.643816,happy,43.05,face_input,Guest,,
-2026-05-05 22:25:41.714729,neutral,63.92,face_input,Guest,,
-2026-05-05 22:25:48.795045,fearful,82.97,face_input,Guest,,
-2026-05-05 22:25:53.210331,fearful,92.76,face_input,Guest,,
-2026-05-05 22:25:57.781134,fearful,94.24,face_input,Guest,,
-2026-05-05 22:26:02.997909,surprised,50.41,face_input,Guest,,
-2026-05-07 22:24:19.767014,fearful,83.71,face_input,Guest,,
-2026-05-07 22:24:34.936049,angry,69.72,face_input,Guest,,
-2026-05-07 22:24:45.116666,happy,97.44,face_input,Guest,,
-2026-05-07 22:24:57.349310,sad,72.72,face_input,Guest,,
-2026-05-07 22:26:08.065011,sad,96.1,text_input,Alok Mittal,,
-2026-05-07 22:26:50.915664,surprised,98.13,text_input,Alok Mittal,,
-2026-05-07 22:27:37.698800,happy,88.71,face_input,Guest,,
-2026-05-07 22:27:38.115277,surprised,98.13,text_input,Guest,,
-2026-05-07 22:27:58.545213,fear,58.26,voice_input,Guest,,
-2026-05-07 22:27:58.581298,surprised,32.71,fusion_input,Guest,,
-2026-05-07 22:28:44.249706,fearful,97.64,face_input,Apoorv Mittal,,
-2026-05-07 22:29:20.398846,surprised,99.99,face_input,Apoorv Mittal,,
-2026-05-09 12:35:08.043647,happy,99.63,face_input,Guest,,
-2026-05-09 12:35:31.501581,neutral,95.59,face_input,Apoorv Mittal,,
-2026-05-09 12:35:38.685398,happy,99.42,face_input,Apoorv Mittal,,
-2026-05-09 12:35:46.402535,neutral,90.78,face_input,Apoorv Mittal,,
-2026-05-09 12:35:53.953189,surprised,65.63,face_input,Apoorv Mittal,,
-2026-05-09 12:36:02.903519,happy,68.76,face_input,Apoorv Mittal,,
-2026-05-09 12:36:10.572510,happy,68.65,face_input,Apoorv Mittal,,
-2026-05-09 12:36:20.785054,angry,61.18,face_input,Apoorv Mittal,,
-2026-05-09 12:37:36.735149,fearful,52.31,face_input,Alok Mittal,,
-2026-05-09 12:37:46.797941,neutral,99.21,face_input,Alok Mittal,,
-2026-05-09 12:39:13.345423,neutral,31.63,voice_input,Apoorv Mittal,,
-2026-05-11 08:42:19.784325,happy,98.19,face_input,Guest,,
-2026-05-11 08:43:25.361946,sad,97.28,text_input,Apoorv Mittal,,
-2026-05-11 08:43:49.716350,fearful,97.64,face_input,Apoorv Mittal,,
-2026-05-11 08:44:44.210075,surprised,100.0,face_input,Apoorv Mittal,,
-2026-05-11 08:45:06.289628,neutral,71.98,face_input,Apoorv Mittal,,
-2026-05-11 08:46:50.718012,fearful,52.31,face_input,Apoorv Mittal,,
-2026-05-11 08:47:43.732248,angry,99.62,face_input,Apoorv Mittal,,
-2026-05-11 08:47:59.816154,angry,99.88,face_input,Apoorv Mittal,,
-2026-05-11 08:53:47.900608,surprised,99.99,face_input,Guest,,
-2026-05-11 08:54:28.733494,surprised,99.99,face_input,Guest,,
-2026-05-11 16:49:22.572867,neutral,82.99,face_input,Guest,,
-2026-05-11 16:49:31.759817,happy,99.71,face_input,Guest,,
-2026-05-11 16:51:19.712421,surprised,85.71,face_input,Guest,,
-2026-05-11 16:51:26.302440,angry,58.55,face_input,Guest,,
-2026-05-11 16:51:47.884491,surprise,67.63,voice_input,Guest,,
-2026-05-11 16:53:06.241845,neutral,20.85,voice_input,Guest,,
-2026-05-11 16:53:58.108509,fearful,89.36,face_input,Guest,,
-2026-05-11 16:54:30.439007,fearful,93.59,face_input,Guest,,
-2026-05-11 16:54:34.873251,happy,99.69,face_input,Guest,,
-2026-05-11 16:55:39.172433,neutral,57.35,voice_input,Guest,,
-2026-05-11 17:01:28.903814,happy,95.82,face_input,Alok Mittal,,
-2026-05-11 17:01:34.500939,happy,99.51,face_input,Alok Mittal,,
-2026-05-11 17:01:36.927007,happy,99.77,face_input,Alok Mittal,,
-2026-05-11 17:02:42.509786,fearful,95.68,text_input,Alok Mittal,,
-2026-05-11 17:07:40.088510,happy,86.75,face_input,Guest,,
-2026-05-11 17:07:51.332441,happy,70.94,face_input,Guest,,
-2026-05-11 17:16:00.073476,fearful,98.38,text_input,Apoorv Mittal,,
-2026-05-11 17:19:10.279523,happy,76.16,face_input,Apoorv Mittal,,
-2026-05-11 17:19:10.707996,neutral,76.86,text_input,Apoorv Mittal,,
-2026-05-11 17:19:13.179888,disgust,77.73,voice_input,Apoorv Mittal,,
-2026-05-11 17:19:13.228496,disgust,38.865,fusion_input,Apoorv Mittal,,
-2026-05-11 17:20:15.063998,neutral,71.98,face_input,Guest,,
-2026-05-11 17:20:33.339176,neutral,85.98,face_input,Guest,,
-2026-05-11 17:20:43.003045,fearful,97.64,face_input,Guest,,
-2026-05-11 17:25:30.266217,surprise,53.5,voice_input,Guest,,
-2026-05-11 17:27:11.601801,fear,40.93,voice_input,Guest,,
-2026-05-11 17:29:39.822378,neutral,91.55,face_input,Guest,,
-2026-05-11 17:30:16.168928,happy,96.26,text_input,Apoorv Mittal,,
-2026-05-11 17:31:25.118566,happy,100.0,face_input,Guest,,
-2026-05-11 17:31:25.487743,angry,96.47,text_input,Guest,,
-2026-05-11 17:31:36.289190,neutral,57.35,voice_input,Guest,,
-2026-05-11 17:31:36.665346,happy,50.0,fusion_input,Guest,,
-2026-05-11 17:32:35.952386,sad,95.28,face_input,Guest,,
-2026-05-11 18:14:19.185239,neutral,99.21,face_input,Guest,,
-2026-05-11 18:14:45.670219,fearful,52.31,face_input,Guest,,
-2026-05-11 18:23:40.477475,surprised,81.34,face_input,Guest,,
-2026-05-11 18:24:15.687211,surprised,91.48,face_input,Guest,,
-2026-05-11 18:25:15.975838,angry,35.92,face_input,Guest,,
-2026-05-11 18:25:37.623535,sad,99.65,face_input,Guest,,
-2026-05-11 18:26:38.565927,surprised,99.99,face_input,Guest,,
-2026-05-11 18:28:05.425646,neutral,99.94,face_input,Guest,,
-2026-05-11 18:28:11.084419,surprised,99.85,face_input,Guest,,
-2026-05-11 18:28:19.356753,surprised,95.0,face_input,Guest,,
-2026-05-11 18:28:40.291840,neutral,99.24,face_input,Guest,,
-2026-05-11 18:30:53.741114,angry,34.75,face_input,Guest,,
-2026-05-11 18:31:03.369580,neutral,80.87,face_input,Guest,,
-2026-05-11 18:31:09.199322,sad,100.0,face_input,Guest,,
-2026-05-11 18:31:17.010122,happy,98.98,face_input,Guest,,
-2026-05-11 18:46:21.229490,sad,94.92,face_input,Guest,,
-2026-05-11 18:46:29.299445,neutral,54.39,face_input,Guest,,
-2026-05-11 18:46:36.305474,neutral,94.95,face_input,Guest,,
-2026-05-11 18:46:48.137900,neutral,99.24,face_input,Guest,,
-2026-05-11 18:47:12.254204,neutral,99.96,face_input,Guest,,
-2026-05-11 18:47:25.282311,happy,73.76,face_input,Guest,,
-2026-05-11 18:47:34.820192,neutral,99.21,face_input,Guest,,
-2026-05-11 18:47:48.403894,neutral,85.98,face_input,Guest,,
-2026-05-11 20:29:47.349723,happy,99.96,face_input,Guest,,
-2026-05-11 20:30:53.493408,fearful,87.82,text_input,Guest,,
-2026-05-11 20:32:22.664342,angry,55.5,face_input,Apoorv Mittal,,
-2026-05-11 20:32:23.511171,angry,84.29,text_input,Apoorv Mittal,,
-2026-05-11 20:32:33.449822,surprise,75.76,voice_input,Apoorv Mittal,,
-2026-05-11 20:32:33.490136,angry,46.59666666666667,fusion_input,Apoorv Mittal,,
-2026-05-11 20:33:02.892926,angry,84.29,text_input,Guest,,
-2026-05-11 20:33:18.820824,angry,57.65,face_input,Guest,,
-2026-05-11 20:33:34.217124,neutral,97.86,face_input,Guest,,
-2026-05-11 20:34:00.786435,neutral,94.95,face_input,Guest,,
-2026-05-11 20:34:21.367962,happy,30.66,voice_input,Guest,,
-2026-05-11 20:46:53.119228,happy,99.71,face_input,Guest,,
-2026-05-11 20:46:54.244733,sad,95.42,text_input,Guest,,
-2026-05-11 20:46:56.890709,surprise,75.76,voice_input,Guest,,
-2026-05-11 20:46:56.934832,happy,33.236666666666665,fusion_input,Guest,,
-2026-05-11 20:55:57.156456,fearful,53.72,face_input,Guest,,
-2026-05-11 20:56:37.614711,angry,56.66,face_input,Guest,,
-2026-05-11 20:56:38.349265,neutral,65.81,voice_input,Guest,,
-2026-05-11 20:56:38.361100,angry,56.66,fusion_input,Guest,,
-2026-05-11 20:59:23.277374,surprise,75.76,voice_input,Guest,,
-2026-05-11 20:59:40.463469,neutral,65.81,voice_input,Guest,,
-2026-05-11 20:59:54.633013,fear,58.26,voice_input,Guest,,
-2026-05-11 21:23:50.660398,sad,82.49,face_input,Guest,,
-2026-05-11 21:24:07.322522,surprised,96.45,face_input,Guest,,
-2026-05-11 21:24:14.071819,fearful,85.33,face_input,Guest,,
-2026-05-11 21:24:22.358951,surprised,86.53,face_input,Guest,,
-2026-05-11 21:25:10.709800,fearful,33.07,face_input,Apoorv Mittal,,
-2026-05-11 21:25:17.206443,sad,61.97,face_input,Apoorv Mittal,,
-2026-05-11 21:25:28.363209,fearful,92.22,face_input,Apoorv Mittal,,
-2026-05-11 21:25:35.279027,happy,99.61,face_input,Apoorv Mittal,,
-2026-05-11 21:26:34.298509,neutral,65.81,voice_input,Guest,,
-2026-05-11 21:26:54.932375,surprise,23.19,voice_input,Guest,,
-2026-05-11 21:27:16.508252,disgust,77.73,voice_input,Guest,,
-2026-05-11 21:27:56.808240,surprise,75.76,voice_input,Guest,,
-2026-05-11 21:38:58.960395,happy,99.89,face_input,Guest,,
-2026-05-11 21:39:08.434515,surprised,69.32,face_input,Guest,,
-2026-05-11 21:39:15.229867,fearful,47.44,face_input,Guest,,
-2026-05-11 21:39:23.069416,angry,97.52,face_input,Guest,,
-2026-05-11 21:39:29.701593,neutral,92.84,face_input,Guest,,
-2026-05-11 21:40:09.928128,neutral,41.39,text_input,Alok Mittal,,
-2026-05-11 21:41:13.542993,happy,99.99,face_input,Guest,,
-2026-05-11 21:41:14.182722,sad,99.11,text_input,Guest,,
-2026-05-11 21:41:17.636238,neutral,57.35,voice_input,Guest,,
-2026-05-11 21:41:17.761371,happy,49.995,fusion_input,Guest,,
-2026-05-11 21:42:02.486628,happy,73.25,face_input,Apoorv Mittal,,
-2026-05-11 21:42:15.404997,happy,93.15,face_input,Apoorv Mittal,,
-2026-05-11 21:42:34.317485,fearful,65.66,face_input,Apoorv Mittal,,
-2026-05-11 21:43:07.042302,neutral,57.35,voice_input,Guest,,
-2026-05-11 21:43:28.014777,surprise,56.68,voice_input,Guest,,
-2026-05-11 22:11:21.480028,happy,93.15,face_input,Guest,,
-2026-05-11 22:11:37.170680,happy,93.15,face_input,Guest,,
-2026-05-11 22:11:49.487611,fearful,96.26,face_input,Guest,,
-2026-05-11 22:12:24.547728,fearful,66.97,face_input,Guest,,
-2026-05-11 22:13:31.906709,fearful,65.92,face_input,Guest,,
-2026-05-11 22:14:58.431532,surprised,71.06,face_input,Guest,,
-2026-05-11 22:14:58.462965,surprised,71.06,fusion_input,Guest,,
-2026-05-11 22:15:40.274074,fearful,88.03,face_input,Guest,,
-2026-05-11 22:16:12.410228,surprised,94.3,face_input,Guest,,
-2026-05-11 22:18:13.629528,angry,97.16,face_input,Guest,,
-2026-05-12 07:51:58.311159,fearful,36.14,face_input,Guest,,
-2026-05-12 07:52:05.646381,fearful,39.37,face_input,Guest,,
-2026-05-12 07:52:14.810111,happy,97.18,face_input,Guest,,
-2026-05-12 07:52:20.014228,angry,54.0,face_input,Guest,,
-2026-05-12 07:53:12.070143,neutral,97.56,face_input,Guest,,
-2026-05-12 07:53:18.493662,neutral,97.25,face_input,Guest,,
-2026-05-12 07:53:24.001742,happy,100.0,face_input,Guest,,
-2026-05-12 08:43:54.452594,happy,97.96,face_input,Guest,,
-2026-05-12 08:44:34.102332,fearful,99.26,text_input,Guest,,
-2026-05-12 11:41:39.595144,fearful,83.46,face_input,Guest,,
-2026-05-12 11:41:45.092654,fearful,96.7,face_input,Guest,,
-2026-05-12 11:42:30.112673,neutral,46.88,text_input,Alok Mittal,,
-2026-05-12 11:43:41.521149,surprised,79.2,face_input,Guest,,
-2026-05-12 11:43:42.137990,happy,98.12,text_input,Guest,,
-2026-05-12 11:44:03.518457,fear,58.26,voice_input,Guest,,
-2026-05-12 11:44:03.581745,happy,32.70666666666667,fusion_input,Guest,,
-2026-05-12 11:46:17.170797,surprise,75.76,voice_input,Guest,,
-2026-05-12 11:46:36.737593,fear,58.26,voice_input,Guest,,
-2026-05-12 11:46:46.909764,fear,84.74,voice_input,Guest,,
-2026-05-12 11:46:56.817634,happy,67.92,voice_input,Guest,,
-2026-05-12 11:47:08.656468,disgust,59.5,voice_input,Guest,,
-2026-05-12 14:14:37.546364,surprised,39.36,face_input,Guest,,
-2026-05-12 14:15:20.858110,sad,94.61,text_input,Puja Gupta,,
-2026-05-12 14:16:47.990738,fearful,47.79,face_input,Puja Gupta,,
-2026-05-12 14:16:48.423335,happy,91.35,text_input,Puja Gupta,,
-2026-05-12 14:16:59.685689,fear,58.26,voice_input,Puja Gupta,,
-2026-05-12 14:16:59.747210,happy,30.45,fusion_input,Puja Gupta,,
-2026-05-12 14:18:38.376729,sad,94.92,face_input,Guest,,
-2026-05-12 14:18:48.415347,neutral,54.39,face_input,Guest,,
-2026-05-12 22:33:50.022832,neutral,72.6,face_input,Guest,,
-2026-05-12 22:34:01.798776,neutral,81.76,face_input,Guest,,
-2026-05-12 22:34:11.672222,angry,96.81,face_input,Guest,,
-2026-05-12 22:34:21.366104,neutral,99.9,face_input,Guest,,
-2026-05-12 22:34:31.344145,happy,89.7,face_input,Guest,,
-2026-05-12 22:35:18.515023,sad,92.39,text_input,Guest,,
-2026-05-12 22:36:15.859332,neutral,50.15,text_input,Apoorv Mittal,,
-2026-05-12 22:37:28.842628,happy,98.56,face_input,Apoorv Mittal,,
-2026-05-12 22:37:29.325019,neutral,50.15,text_input,Apoorv Mittal,,
-2026-05-12 22:37:30.983755,disgust,77.73,voice_input,Apoorv Mittal,,
-2026-05-12 22:37:31.037377,happy,49.28,fusion_input,Apoorv Mittal,,
-2026-05-12 22:37:51.775719,neutral,94.54,face_input,Apoorv Mittal,,
-2026-05-12 22:37:52.284020,neutral,50.15,text_input,Apoorv Mittal,,
-2026-05-12 22:37:53.674253,disgust,77.73,voice_input,Apoorv Mittal,,
-2026-05-12 22:37:53.721253,disgust,77.73,fusion_input,Apoorv Mittal,,
-2026-05-12 22:39:03.126829,fearful,97.64,face_input,Apoorv Mittal,,
-2026-05-12 22:39:19.440400,happy,99.03,face_input,Apoorv Mittal,,
-2026-05-13 18:01:33.626429,disgust,77.73,voice_input,Alok Mittal,,
-2026-05-13 18:02:07.808899,fear,58.26,voice_input,Alok Mittal,,
-2026-05-13 18:02:28.735726,surprise,75.76,voice_input,Alok Mittal,,
-2026-05-13 18:03:02.738255,happy,100.0,face_input,Puja Gupta,,
-2026-05-13 18:03:21.006199,angry,34.75,face_input,Puja Gupta,,
-2026-05-13 18:03:40.112002,surprised,95.0,face_input,Puja Gupta,,
-2026-05-13 19:12:18.164145,happy,99.55,face_input,Guest,,
-2026-05-13 19:12:49.957100,neutral,99.91,face_input,Aarav Gupta,,
-2026-05-13 19:12:56.500533,fearful,77.4,face_input,Aarav Gupta,,
-2026-05-13 19:15:01.886030,happy,87.51,face_input,Guest,,
-2026-05-13 19:15:03.177317,sad,98.97,text_input,Guest,,
-2026-05-13 19:15:07.504837,angry,45.92,voice_input,Guest,,
-2026-05-13 19:15:07.586801,sad,32.99,fusion_input,Guest,,
-2026-05-13 19:15:43.826280,happy,93.15,face_input,Guest,,
-2026-05-13 19:17:49.422338,fearful,68.02,face_input,Guest,,
-2026-05-13 19:18:21.545455,happy,74.16,face_input,Advik Gupta,,
-2026-05-13 19:20:32.988563,sad,98.37,text_input,Advik Gupta,,
-2026-05-13 19:21:18.972456,neutral,53.7,face_input,Guest,,
-2026-05-13 19:21:19.385054,sad,97.45,text_input,Guest,,
-2026-05-13 19:21:22.205510,angry,45.92,voice_input,Guest,,
-2026-05-13 19:21:22.291567,sad,48.725,fusion_input,Guest,,
-2026-05-13 19:21:58.608273,happy,93.15,face_input,Guest,,
-2026-05-13 19:22:22.264331,happy,99.37,face_input,Guest,,
-2026-05-13 19:24:49.899351,surprised,86.5,face_input,Guest,,
-2026-05-13 19:25:10.871277,surprised,75.27,face_input,Guest,,
-2026-05-13 19:25:17.734038,neutral,64.73,face_input,Guest,,
-2026-05-13 19:25:21.215059,happy,48.57,face_input,Guest,,
-2026-05-13 19:34:13.462038,happy,98.16,face_input,Guest,,
-2026-05-13 19:38:10.525565,disgusted,97.58,text_input,Pankaj Gupta,,
-2026-05-13 19:39:04.861799,happy,99.82,face_input,Pankaj Gupta,,
-2026-05-13 19:39:05.980351,happy,98.53,text_input,Pankaj Gupta,,
-2026-05-13 19:39:09.583692,angry,45.92,voice_input,Pankaj Gupta,,
-2026-05-13 19:39:09.660662,happy,66.11666666666666,fusion_input,Pankaj Gupta,,
-2026-05-13 19:40:44.616150,happy,93.15,face_input,Guest,,
-2026-05-13 19:42:34.834411,neutral,28.98,voice_input,Pankaj Gupta,,
-2026-05-13 21:46:28.443815,neutral,25.65,voice_input,Guest,,
-2026-05-13 21:47:22.851678,neutral,23.18,voice_input,Guest,,
-2026-05-13 21:47:44.174590,surprise,39.96,voice_input,Guest,,
-2026-05-13 21:48:06.273932,surprise,68.31,voice_input,Guest,,
-2026-05-13 22:57:18.986288,sad,50.97,face_input,Guest,,
-2026-05-13 22:57:24.334778,neutral,52.28,face_input,Guest,,
-2026-05-13 22:57:38.160342,neutral,54.39,face_input,Guest,,
-2026-05-13 22:57:45.186279,sad,94.92,face_input,Guest,,
-2026-05-13 22:57:52.737093,happy,99.96,face_input,Guest,,
-2026-05-13 22:59:15.770514,angry,31.29,voice_input,Guest,,
-2026-05-14 09:57:47.927593,neutral,92.13,face_input,Guest,,
-2026-05-14 10:49:31.881811,neutral,96.76,face_input,Guest,,
-2026-05-14 19:13:08.835944,sad,100.0,face_input,Guest,,
-2026-05-14 19:21:22.238536,happy,89.55,face_input,Guest,,
-2026-05-14 19:21:28.451970,happy,99.82,face_input,Guest,,
-2026-05-14 19:21:53.855351,sad,94.92,face_input,Guest,,
-2026-05-15 08:38:44.051875,sad,99.34,face_input,Guest,,
-2026-05-15 09:37:44.759216,neutral,86.45,face_input,Guest,,
-2026-05-15 09:38:58.324689,surprised,65.15,face_input,Preeti Gupta,,
-2026-05-15 09:39:03.012430,disgusted,97.29,text_input,Preeti Gupta,,
-2026-05-15 09:39:19.700180,disgust,77.73,voice_input,Preeti Gupta,,
-2026-05-15 09:39:19.747354,disgusted,32.43,fusion_input,Preeti Gupta,,
-2026-05-15 10:04:53.257541,happy,99.67,face_input,Guest,,
-2026-05-15 10:48:17.781478,neutral,100.0,face_input,Guest,,
-2026-05-15 11:44:15.556198,neutral,53.92,face_input,Guest,,
-2026-05-15 11:45:14.430988,neutral,95.41,face_input,Ajay Jha,,
-2026-05-15 11:46:24.224518,neutral,99.62,face_input,Ajay Jha,,
-2026-05-15 11:46:27.671505,neutral,68.4,text_input,Ajay Jha,,
-2026-05-15 11:46:29.823960,surprise,75.76,voice_input,Ajay Jha,,
-2026-05-15 11:46:29.841767,surprise,75.76,fusion_input,Ajay Jha,,
-2026-05-15 12:25:11.054717,sad,89.18,face_input,vikas kamra,,
-2026-05-15 12:25:11.790700,neutral,44.68,text_input,vikas kamra,,
-2026-05-15 12:25:12.637709,disgust,77.73,voice_input,vikas kamra,,
-2026-05-15 12:25:12.655336,sad,44.59,fusion_input,vikas kamra,,
-2026-05-19 21:37:19.540795,happy,73.57,face_input,Guest,,
-2026-05-19 21:37:27.024887,angry,99.97,face_input,Guest,,
-2026-05-19 21:37:33.891110,neutral,57.72,face_input,Guest,,
-2026-05-19 21:37:40.440993,neutral,90.27,face_input,Guest,,
-2026-05-19 21:37:46.265765,angry,41.72,face_input,Guest,,
-2026-05-19 21:38:54.828406,neutral,51.79,text_input,Alok Mittal,,
-2026-05-19 21:39:28.480846,sad,42.32,text_input,Alok Mittal,,
-2026-05-19 21:40:28.444871,happy,99.96,face_input,Guest,,
-2026-05-19 21:40:40.440340,surprised,81.34,face_input,Guest,,
-2026-05-19 21:40:53.990297,fearful,97.64,face_input,Guest,,
+2026-03-16 20:28:40.051638,happy,1.0,,Guest,image,streamlit
+2026-03-16 20:30:19.936701,happy,1.0,,Guest,image,streamlit
+2026-03-16 20:31:01.550706,anger,0.65," जब मैं इन दुखों से निकल जाऊंगी
+तो मेरा पहला काम तुम्हें
+पहचानने से इंकार होगा !",Guest,text,streamlit
+2026-03-16 20:34:01.863850,neutral,0.1,,Guest,voice,streamlit
+2026-03-16 20:42:05.807542,happy,0.81,,Guest,face,webcam
+2026-03-16 20:47:31.311237,anger,0.65," जब मैं इन दुखों से निकल जाऊंगी
+तो मेरा पहला काम तुम्हें
+पहचानने से इंकार होगा !",Guest,text,streamlit
+2026-03-16 20:52:19.947897,anger,0.65," जब मैं इन दुखों से निकल जाऊंगी
+तो मेरा पहला काम तुम्हें
+पहचानने से इंकार होगा !",Guest,text,streamlit
+2026-03-16 20:52:27.123349,anger,0.65," जब मैं इन दुखों से निकल जाऊंगी
+तो मेरा पहला काम तुम्हें
+पहचानने से इंकार होगा !",Guest,text,streamlit
+2026-03-16 21:09:01.440096,happy,1.0,,Guest,image,streamlit
+2026-03-16 21:32:21.823843,neutral,0.1,,Guest,voice,streamlit
+2026-03-18 17:56:20.589854,neutral,0.69,,Apoorv Mittal,face,webcam
+2026-03-18 17:57:30.808968,surprise,0.45,,Guest,face,webcam
+2026-03-18 17:58:16.807499,surprise,0.89,,Guest,face,webcam
+2026-03-18 17:58:59.337306,surprise,0.66,,Guest,face,webcam
+2026-03-18 17:59:34.135499,neutral,0.68,"किसी के साथ इतनी उम्मीद मत रखना,
+कि उम्मीद के साथ खुद भी टूट जाओ ",Guest,text,streamlit
+2026-03-18 18:00:28.695509,neutral,0.42,"N'ayez jamais peur de la vie, n'ayez jamais peur de l'aventure, faites confiance au hasard, à la chance, à la destinée",Guest,text,streamlit
+2026-03-18 18:01:55.455451,surprise,0.66,,Guest,face,webcam
+2026-03-18 18:11:05.503126,happy,0.8,,Guest,face,webcam
+2026-03-18 18:11:36.233153,angry,0.4,,Guest,face,webcam
+2026-03-18 18:12:24.585520,surprise,0.76,,Guest,face,webcam
+2026-03-18 18:19:01.599264,neutral,0.6,,Guest,face,webcam
+2026-03-18 18:26:24.830872,neutral,0.6,,Guest,face,webcam
+2026-03-18 18:29:25.057121,happy,0.99,,Guest,face,webcam
+2026-03-18 18:30:00.047728,happy,0.99,,Guest,face,webcam
+2026-03-18 18:33:10.309950,neutral,0.47,"हर बार जब आप क्रोधित होते हैं, तब आप अपनी ही प्रणाली में ज़हर घोलते हैं ।",Guest,text,streamlit
+2026-03-18 18:34:29.603352,neutral,0.53,क्रोध वह हवा है जो बुद्धि के दीप को बुझा देती है ।,Guest,text,streamlit
+2026-03-18 18:44:21.223787,happy,1.0,,Guest,image,streamlit
+2026-03-18 18:46:13.178994,happy,0.5425899950715296,,Guest,voice,streamlit
+2026-03-18 18:52:00.390234,happy,0.1124247852744241,,Guest,voice,streamlit
+2026-03-18 18:52:30.979080,happy,0.1124247852744241,,Guest,voice,streamlit
+2026-03-18 18:53:22.219635,happy,1.0,,Guest,image,streamlit
+2026-03-18 18:54:02.421132,happy,1.0,,Guest,image,streamlit
+2026-03-18 18:54:19.891991,neutral,0.53,क्रोध वह हवा है जो बुद्धि के दीप को बुझा देती है ।,Guest,text,streamlit
+2026-03-18 18:55:40.267064,happy,0.99,,Guest,face,webcam
+2026-03-18 18:55:49.124744,neutral,0.53,क्रोध वह हवा है जो बुद्धि के दीप को बुझा देती है ।,Guest,text,streamlit
+2026-03-18 18:56:25.665564,happy,1.0,,Guest,image,streamlit
+2026-03-18 19:21:24.467721,neutral,0.53,क्रोध वह हवा है जो बुद्धि के दीप को बुझा देती है ।,Guest,text,streamlit
+2026-03-18 19:22:53.050999,happy,1.0,,Guest,image,streamlit
+2026-03-18 19:25:25.744554,happy,1.0,,Guest,image,streamlit
+2026-03-18 19:29:03.159769,happy,0.98,,Guest,image,streamlit
+2026-03-18 19:32:51.911118,happy,1.0,,Guest,image,streamlit
+2026-03-28 10:25:48.316762,happy,0.897,,Guest,face,webcam
+2026-03-28 10:26:32.160542,surprise,0.468,,Guest,face,webcam
+2026-03-28 10:26:41.299057,sad,0.996,,Guest,face,webcam
+2026-03-28 10:27:10.100987,neutral,0.82,"शाम होते ही चराग़ों को बुझा देता हूँ
+दिल ही काफ़ी है तिरी याद में जलने के लिए
+",Guest,text,streamlit
+2026-03-28 10:27:52.792532,neutral,0.85,"तुम फिर उसी अदा से अंगड़ाई ले के हँस दो
+आ जाएगा पलट कर गुज़रा हुआ ज़माना
+
+",Guest,text,streamlit
+2026-03-28 10:29:04.538605,neutral,0.93,"La vie est une ivresse continuelle : le plaisir passe, le mal de tête reste.
+
+",Guest,text,streamlit
+2026-03-28 10:39:28.484430,neutral,0.96,Un brin de folie égaye la vie,Guest,text,streamlit
+2026-03-28 10:43:28.225950,neutral,0.95,La vie est un voyage au milieu de la nuit,Guest,text,streamlit
+2026-03-28 10:43:44.965170,neutral,0.91,"La vie est un grand drame, il faut le bien jouer. Mais ce qu’il faut surtout, c’est le bien dénouer
+",Guest,text,streamlit
+2026-03-28 10:49:25.414145,neutral,0.839,,Guest,face,webcam
+2026-03-28 10:49:33.626321,happy,0.988,,Guest,face,webcam
+2026-03-28 10:49:48.582868,happy,0.988,,Guest,face,webcam
+2026-03-28 10:49:59.329861,happy,0.988,,Guest,face,webcam
+2026-03-28 10:50:20.996887,neutral,0.91,"La vie est un grand drame, il faut le bien jouer. Mais ce qu’il faut surtout, c’est le bien dénouer",Guest,text,streamlit
+2026-03-28 10:57:40.362855,neutral,0.91,"La vie est un grand drame, il faut le bien jouer. Mais ce qu’il faut surtout, c’est le bien dénouer",Guest,text,streamlit
+2026-03-28 11:02:06.246730,neutral,0.93,La vie est un arbre dont le fruit est souvent amer,Guest,text,streamlit
+2026-03-28 11:06:46.211851,neutral,0.95,"Si jeunesse savait, si vieillesse pouvait",Guest,text,streamlit
+2026-03-28 11:08:05.461658,neutral,0.94,"मंज़िलें उन्हीं को मिलती हैं, जिनके सपनों में जान होती है,
+पंखों से कुछ नहीं होता, हौसलों से उड़ान होती है।",Guest,text,streamlit
+2026-03-28 11:11:51.453796,neutral,0.94,"मंज़िलें उन्हीं को मिलती हैं, जिनके सपनों में जान होती है,
+पंखों से कुछ नहीं होता, हौसलों से उड़ान होती है।",Guest,text,streamlit
+2026-03-28 15:48:40.667501,neutral,0.62,"भूलने को सोचा उन्हें पर भूल कहा पा रहे है,
+हवाओं में उनकी खुशबू फैली हुई है,
+अब क्या सांस लेना छोड़ दे",Guest,text,streamlit
+2026-03-28 15:49:16.322320,neutral,0.87,"क़ब्रों में नहीं हम को किताबों में उतारो
+हम लोग मोहब्बत की कहानी में मरें हैं
+",Guest,text,streamlit
+2026-03-28 15:50:03.558911,happy,0.7,"खुशी एक तितली की तरह है, जिसका पीछा करने पर वह हमेशा हमारी पकड़ से दूर रहती है, लेकिन अगर आप शांति से बैठ जाएं तो वह शायद आप पर आकर बैठ जाए
+",Guest,text,streamlit
+2026-03-28 15:51:01.953259,neutral,0.894,,Alok Mittal,face,webcam
+2026-03-28 15:51:15.982588,surprise,0.998,,Guest,face,webcam
+2026-03-28 15:51:33.474713,surprise,0.998,,Guest,face,webcam
+2026-03-28 15:51:42.478365,surprise,0.998,,Guest,face,webcam
+2026-03-28 15:52:44.185708,neutral,0.33,"खुशी एक तितली की तरह है, जिसका पीछा करने पर वह हमेशा हमारी पकड़ से दूर रहती है, लेकिन अगर आप शांति से बैठ जाएं तो वह शायद आप पर आकर बैठ जाए",Guest,multimodal,streamlit
+2026-03-28 15:53:19.349901,fear,0.369,,Guest,image,streamlit
+2026-03-28 15:55:08.668341,neutral,0.1,,Alok Mittal,voice,streamlit
+2026-03-28 15:56:34.549349,anger,0.1645052886159883,,Alok Mittal,voice,streamlit
+2026-03-28 15:57:22.269423,neutral,0.1070592433257777,,Alok Mittal,voice,streamlit
+2026-03-28 22:23:42.080037,happy,0.7,"खुशी एक तितली की तरह है, जिसका पीछा करने पर वह हमेशा हमारी पकड़ से दूर रहती है, लेकिन अगर आप शांति से बैठ जाएं तो वह शायद आप पर आकर बैठ जाए
+",Guest,text,streamlit
+2026-03-28 22:24:18.762661,happy,0.7,"खुशी एक तितली की तरह है, जिसका पीछा करने पर वह हमेशा हमारी पकड़ से दूर रहती है, लेकिन अगर आप शांति से बैठ जाएं तो वह शायद आप पर आकर बैठ जाए
+",Guest,text,streamlit
+2026-03-28 22:24:51.092863,surprise,0.888,,Guest,face,webcam
+2026-03-28 22:25:06.518835,surprise,0.888,,Guest,face,webcam
+2026-03-28 22:29:29.645850,surprise,0.888,,Guest,face,webcam
+2026-03-28 22:33:39.386201,sad,0.321,,Guest,face,webcam
+2026-03-28 22:33:56.302357,happy,0.979,,Guest,face,webcam
+2026-03-28 22:34:07.114223,neutral,0.856,,Guest,face,webcam
+2026-03-28 22:34:43.489925,fear,0.369,,Guest,image,streamlit
+2026-03-28 22:35:15.126210,surprise,0.341,,Guest,image,streamlit
+2026-03-28 22:35:27.682408,neutral,0.559,,Guest,image,streamlit
+2026-03-28 22:35:39.974294,neutral,0.704,,Guest,image,streamlit
+2026-03-28 22:36:11.055552,fear,0.369,,Alok Mittal,image,streamlit
+2026-03-28 22:40:29.036946,happy,0.49,"दिल सुलगता है तिरे सर्द रवय्ये से मिरा
+देख अब बर्फ़ ने क्या आग लगा रक्खी है",Alok Mittal,multimodal,streamlit
+2026-03-28 22:49:09.618141,happy,0.28,"सिर्फ़ उस के होंट काग़ज़ पर बना देता हूँ मैं
+ख़ुद बना लेती है होंटों पर हँसी अपनी जगह",Guest,multimodal,streamlit
+2026-03-30 11:59:24.739929,angry,0.828,,Guest,face,webcam
+2026-03-30 12:00:30.681451,sad,0.38,J'ai la nausée.,Guest,text,streamlit
+2026-03-30 12:00:49.144764,neutral,0.86,Beurk !,Guest,text,streamlit
+2026-03-30 12:02:59.608834,fear,0.87,Quelle horreur !,Guest,text,streamlit
+2026-03-30 12:06:09.742687,neutral,0.85,C’est répugnant.,Guest,text,streamlit
+2026-03-30 12:06:27.356607,anger,0.81,Ça me dégoûte.,Guest,text,streamlit
+2026-03-30 12:14:41.271646,happy,0.57,Tu es drôle,Guest,multimodal,streamlit
+2026-03-30 12:19:34.519818,surprise,0.341,,Guest,image,streamlit
+2026-03-30 13:19:13.104357,neutral,0.1194377505974813,,Guest,voice,streamlit
+2026-03-30 15:54:28.169469,surprise,0.341,,Guest,image,streamlit
+2026-03-30 15:54:36.845084,neutral,0.559,,Guest,image,streamlit
+2026-03-30 15:54:47.876844,fear,0.369,,Guest,image,streamlit
+2026-03-30 15:57:27.934588,happy,0.5425899950715296,,Guest,voice,streamlit
+2026-03-30 16:00:49.125740,happy,0.2734951238129524,,Guest,voice,streamlit
+2026-03-30 16:42:49.453272,happy,0.136559203726998,,Guest,voice,streamlit
+2026-03-30 16:56:01.249756,fear,0.369,,Guest,image,streamlit
+2026-03-30 17:03:55.638189,neutral,0.95,"Petit à petit, l'oiseau fait son nid.",Guest,text,streamlit
+2026-03-30 17:04:13.783353,neutral,0.95,"Petit à petit, l'oiseau fait son nid.",Guest,text,streamlit
+2026-03-30 17:05:41.965870,happy,0.89,Tu es drôle,Guest,multimodal,streamlit
+2026-03-30 17:06:05.376365,neutral,0.95,"Petit à petit, l'oiseau fait son nid.",Guest,multimodal,streamlit
+2026-03-30 17:06:21.228496,fear,0.369,,Guest,image,streamlit
+2026-03-30 17:11:38.886273,happy,0.136559203726998,,Guest,voice,streamlit
+2026-03-31 16:17:44.880965,neutral,0.833,,Guest,face,webcam
+2026-03-31 16:19:15.548734,neutral,0.68,"Please take me out of the underground gutter, it is very smelly.",Guest,text,streamlit
+2026-03-31 16:23:46.513704,neutral,0.23,"What is this, there is too much cold in this weather in Jammu & Kashmir.",Guest,multimodal,streamlit
+2026-03-31 16:30:05.292463,fear,0.369,,Guest,image,streamlit
+2026-03-31 16:36:00.899919,neutral,0.1131832034109642,,Guest,voice,streamlit
+2026-03-31 16:38:49.137499,neutral,0.1131832034109642,,Guest,voice,streamlit
+2026-03-31 16:47:11.155733,neutral,0.1,,Guest,voice,streamlit
+2026-03-31 16:49:22.378843,neutral,0.559,,Guest,image,streamlit
+2026-04-04 10:18:44.765123,neutral,0.567,,Guest,face,webcam
+2026-04-04 10:19:19.335706,neutral,0.5,Please save me from the tigers present in the forest.,Guest,text,streamlit
+2026-04-04 10:21:06.768590,surprise,0.32,"There is a lot of wind going on here, it is very chilled.",Guest,multimodal,streamlit
+2026-04-04 10:21:28.550297,neutral,0.559,,Guest,image,streamlit
+2026-04-04 11:22:58.060156,neutral,0.1,,Guest,voice,streamlit
+2026-04-04 11:23:29.837127,neutral,0.567,,Guest,face,webcam
+2026-04-04 11:23:42.448938,neutral,0.5,Please save me from the tigers present in the forest.,Guest,text,streamlit
+2026-04-04 11:25:01.292874,surprise,0.32,"There is a lot of wind going on here, it is very chilled.",Guest,multimodal,streamlit
+2026-04-04 11:25:16.922745,neutral,0.559,,Guest,image,streamlit
+2026-04-11 12:33:31.053350,neutral,0.8,"रात आ कर गुज़र भी जाती है
+इक हमारी सहर नहीं होती
+",Guest,text,streamlit
+2026-04-11 12:34:13.789790,neutral,0.8,"रात आ कर गुज़र भी जाती है
+इक हमारी सहर नहीं होती
+
+",Guest,text,streamlit
+2026-04-11 12:34:32.304342,happy,0.744,,Guest,face,webcam
+2026-04-11 12:35:00.823180,happy,0.744,,Guest,face,webcam
+2026-04-11 12:35:31.732688,fear,0.926,,Guest,face,webcam
+2026-04-11 12:36:09.879920,fear,0.94,,Guest,face,webcam
+2026-04-11 12:36:40.553391,happy,0.734,,Alok Mittal,face,webcam
+2026-04-11 12:36:49.670189,happy,0.523,,Alok Mittal,face,webcam
+2026-04-11 12:36:57.037084,neutral,0.571,,Alok Mittal,face,webcam
+2026-04-11 12:37:55.924749,fear,0.22,"दीवारों से मिल कर रोना अच्छा लगता है
+हम भी पागल हो जाएँगे ऐसा लगता है",Alok Mittal,multimodal,streamlit
+2026-04-11 18:06:49.069878,neutral,0.974,,Guest,face,webcam
+2026-04-11 18:08:13.965277,neutral,0.94,J’en ai ras le bol,Guest,text,streamlit
+2026-04-11 18:08:40.879985,neutral,0.96,La goutte d'eau qui fait déborder le vase,Guest,text,streamlit
+2026-04-11 18:10:13.217801,neutral,0.97,"“A book is a garden, an orchard, a storehouse, a party, a company by the way, a counselor, a multitude of counselors.”",Alok Mittal,text,streamlit
+2026-04-11 22:19:08.781833,neutral,0.97,"“A book is a garden, an orchard, a storehouse, a party, a company by the way, a counselor, a multitude of counselors.”",Guest,text,streamlit
+2026-04-11 22:20:51.877837,neutral,0.54,"I have a lot of pending work to complete today, and tommorow is my submission.",Guest,multimodal,streamlit
+2026-04-11 22:26:34.331675,neutral,0.1,,Guest,voice,streamlit
+2026-04-11 22:30:13.229359,surprise,0.341,,Guest,image,streamlit
+2026-04-11 22:30:28.651173,surprise,0.341,,Guest,image,streamlit
+2026-04-11 22:31:09.329648,neutral,0.54,"I have a lot of pending work to complete today, and tommorow is my submission.",Guest,multimodal,streamlit
+2026-04-11 22:33:20.647565,neutral,0.1299451084023167,,Guest,voice,streamlit
+2026-04-12 09:34:49.332137,fear,0.985,,Guest,face,webcam
+2026-04-12 09:35:02.500215,neutral,0.52,,Guest,face,webcam
+2026-04-12 09:35:10.255409,neutral,0.996,,Guest,face,webcam
+2026-04-12 09:35:18.623303,sad,0.754,,Guest,face,webcam
+2026-04-12 09:35:44.743654,sad,0.754,,Guest,face,webcam
+2026-04-12 09:35:52.203522,sad,0.754,,Guest,face,webcam
+2026-04-12 09:37:31.051747,anger,0.62,non mais vraiment ,Apoorv Mittal,text,streamlit
+2026-04-12 09:39:13.088544,happy,0.6,"They promised us to bury the tree of good and evil in the shade, to banish tyrannical honesties, so that we might bring forth our very pure love.",Apoorv Mittal,text,streamlit
+2026-04-12 09:40:43.554709,happy,0.2,"They promised us to bury the tree of good and evil in the shade, to banish tyrannical honesties, so that we might bring forth our very pure love.",Apoorv Mittal,multimodal,streamlit
+2026-04-12 11:40:08.203580,fear,0.422,,Apoorv Mittal,face,webcam
+2026-04-12 11:40:20.220504,fear,0.656,,Apoorv Mittal,face,webcam
+2026-04-12 11:40:28.984510,fear,0.96,,Apoorv Mittal,face,webcam
+2026-04-12 11:40:40.853981,fear,0.96,,Guest,face,webcam
+2026-04-12 11:40:50.858036,fear,0.96,,Guest,face,webcam
+2026-04-12 11:41:36.970576,anger,0.59,"I don't want to do swimming in deep water, it is very risky for me.",Guest,text,streamlit
+2026-04-12 11:50:03.355338,fear,0.44,"They promised us to bury the tree of good and evil in the shade, to banish tyrannical honesties, so that we might bring forth our very pure love.",Guest,multimodal,streamlit
+2026-04-12 11:54:42.324653,neutral,0.43,"They promised us to bury the tree of good and evil in the shade, to banish tyrannical honesties, so that we might bring forth our very pure love.",Guest,multimodal,streamlit
+2026-04-12 12:01:26.398503,fear,0.369,,Guest,image,streamlit
+2026-04-12 12:04:46.027246,fear,0.96,,Guest,face,webcam
+2026-04-12 12:13:55.331444,neutral,0.29,"They promised us to bury the tree of good and evil in the shade, to banish tyrannical honesties, so that we might bring forth our very pure love.",Guest,multimodal,streamlit
+2026-04-12 12:15:35.316153,happy,0.644,,Apoorv Mittal,face,webcam
+2026-04-12 12:20:15.550123,fear,0.82,I don't want to go for trekking as I am scared that I will fall down from the mountains while climbing.,Apoorv Mittal,text,streamlit
+2026-04-25 11:16:16.754195,happy,0.914,,Guest,face,webcam
+2026-04-25 11:19:14.180529,sad,0.826,,Guest,face,webcam
+2026-04-25 11:19:23.610214,sad,0.826,,Guest,face,webcam
+2026-04-25 11:19:37.201503,sad,0.978,,Guest,face,webcam
+2026-04-25 11:21:30.702865,neutral,0.7,यूं ही नहीं मिलती मंजिलें एक जुनून सा दिल में जगाना होता है पूछा चिड़िया से कैसे बनाया आशियाना बोली भरनी पड़ती है उड़ान बार-बार तिनका तिनका उठाना होता है,Apoorv Mittal,text,streamlit
+2026-04-25 11:22:40.255509,neutral,0.45,"जमाना वो भी था जब तुम खास थे,
+जमाना ये भी है के तेरा जिक्र तक नहीं!",Apoorv Mittal,text,streamlit
+2026-04-25 11:23:05.913687,happy,0.73,"जब आप सच्चे प्यार में पड़ जाते है,
+तो आंखों में आंसू लिए रोज मुस्कुराते है!",Apoorv Mittal,text,streamlit
+2026-04-25 11:23:53.436626,fear,0.31,"जब आप सच्चे प्यार में पड़ जाते है,
+तो आंखों में आंसू लिए रोज मुस्कुराते है!",Apoorv Mittal,multimodal,streamlit
+2026-04-25 11:25:45.714436,happy,0.243741751350224,,guest,voice,streamlit
+2026-05-01 15:54:46.690402,neutral,0.96,,Guest,face,webcam
+2026-05-01 16:02:36.114143,neutral,0.86,Je pense à toi tout le temps,Guest,text,streamlit
+2026-05-01 16:07:35.984887,happy,0.49,Tu me rends heureux / heureuse,Guest,multimodal,streamlit
+2026-05-01 16:46:20.413709,neutral,0.949,,Guest,face,webcam
+2026-05-01 23:20:36.224940,neutral,0.665,,Guest,face,webcam
+2026-05-01 23:20:49.820747,happy,0.755,,Guest,face,webcam
+2026-05-01 23:21:19.630469,happy,0.87,Tu me rends heureux / heureuse,Guest,multimodal,streamlit
+2026-05-01 23:25:36.206626,happy,0.22,J'ai la frousse,Guest,multimodal,streamlit
+2026-05-01 23:28:14.804270,fear,0.571,,Guest,face,webcam
+2026-05-01 23:43:06.478656,neutral,0.21,I have just returned home from a marriage.,Guest,multimodal,streamlit
+2026-05-01 23:54:03.982420,neutral,0.74,J'ai les chocottes.,Guest,text,streamlit
+2026-05-01 23:56:30.828840,neutral,0.74,J'ai les chocottes.,Guest,text,streamlit
+2026-05-01 23:57:39.128057,happy,0.5425899950715296,,Guest,voice,streamlit
+2026-05-01 23:58:11.364746,happy,0.2734951238129524,,Guest,voice,streamlit
+2026-05-01 23:58:32.797691,sad,0.446,,Guest,image,streamlit
+2026-05-01 23:58:44.369369,surprise,0.999,,Guest,image,streamlit
+2026-05-01 23:58:52.312740,happy,0.985,,Guest,image,streamlit
+2026-05-02 17:01:58.558024,happy,0.997,,Guest,face,webcam
+2026-05-02 17:02:50.991317,sad,0.446,,Apoorv Mittal,image,streamlit
+2026-05-02 17:03:01.631247,happy,0.689,,Apoorv Mittal,image,streamlit
+2026-05-02 17:03:12.163672,sad,0.446,,Apoorv Mittal,image,streamlit
+2026-05-02 18:55:54.808302,happy,1.0,,Guest,face,webcam
+2026-05-02 18:56:41.081458,happy,0.81,I was very much excited after sitting in the roller coster.,Guest,text,streamlit
+2026-05-02 19:01:25.041005,happy,0.33,"Vouloir, c’est pouvoir.",Guest,multimodal,streamlit
+2026-05-02 19:02:59.120679,sad,0.446,,Guest,image,streamlit
+2026-05-05 22:10:59.660370,neutral,0.98,,Guest,image,streamlit
+2026-05-05 22:11:06.604611,happy,0.745,,Guest,image,streamlit
+2026-05-05 22:11:13.986761,angry,0.932,,Guest,image,streamlit
+2026-05-05 22:11:28.336564,sad,0.504,,Guest,image,streamlit
+2026-05-05 22:11:38.823663,fear,0.565,,Guest,image,streamlit
+2026-05-05 22:11:40.989583,fear,0.565,,Guest,image,streamlit
+2026-05-05 22:11:51.549044,sad,0.582,,Guest,image,streamlit
+2026-05-05 22:16:03.229498,surprise,1.0,,Guest,image,streamlit
+2026-05-05 22:16:10.216736,surprise,0.994,,Guest,image,streamlit
+2026-05-05 22:16:26.099057,surprise,1.0,,Guest,image,streamlit
+2026-05-05 22:16:32.100082,surprise,1.0,,Guest,image,streamlit
+2026-05-05 22:16:46.782451,happy,0.745,,Guest,image,streamlit
+2026-05-05 22:19:00.723508,fear,0.923,,Guest,image,streamlit
+2026-05-05 22:19:08.324420,fear,0.923,,Guest,image,streamlit
+2026-05-05 22:19:15.251039,fear,0.923,,Guest,image,streamlit
+2026-05-05 22:30:54.776157,happy,0.337,,Guest,face,webcam
+2026-05-05 22:35:23.353841,happy,0.5425942642542116,,Guest,voice,streamlit
+2026-05-05 22:36:01.088256,happy,0.5425899950715296,,Guest,voice,streamlit
+2026-05-05 22:36:31.554008,anger,0.1460242818727771,,Guest,voice,streamlit
+2026-05-05 22:38:22.750501,neutral,0.559,,Guest,image,streamlit
+2026-05-05 22:38:32.330868,neutral,0.559,,Guest,image,streamlit
+2026-05-05 22:38:54.612372,happy,0.337,,Guest,face,webcam
+2026-05-09 12:27:06.389742,happy,0.985,,Guest,face,webcam
+2026-05-09 12:27:45.839089,neutral,0.607,,Apoorv Mittal,face,webcam
+2026-05-09 12:27:55.867924,neutral,0.573,,Apoorv Mittal,face,webcam
+2026-05-09 12:28:03.831471,neutral,0.807,,Apoorv Mittal,face,webcam
+2026-05-09 12:28:12.298595,fear,0.585,,Apoorv Mittal,face,webcam
+2026-05-09 12:28:33.870717,neutral,0.725,,Alok Mittal,face,webcam
+2026-05-09 12:28:49.804486,fear,0.933,,Alok Mittal,face,webcam
+2026-05-09 12:29:01.984649,fear,1.0,,Alok Mittal,face,webcam
+2026-05-09 12:29:19.480923,fear,1.0,,Guest,face,webcam
+2026-05-09 12:30:08.144139,neutral,0.5,Fais toujours de ton mieux même si personne ne regarde,Apoorv Mittal,text,streamlit
+2026-05-09 12:30:36.610394,happy,0.52,La simplicité est la sophistication supreme,Apoorv Mittal,text,streamlit
+2026-05-09 12:31:13.208032,neutral,0.5,"Aimer, ce n'est pas se regarder l'un l'autre, c'est regarder ensemble dans la même direction",Apoorv Mittal,text,streamlit
+2026-05-09 15:14:13.325498,fear,0.99,,Guest,face,webcam
+2026-05-11 15:54:09.576271,angry,0.355,,Guest,face,webcam
+2026-05-11 16:05:56.565082,fear,0.923,,Guest,image,streamlit
+2026-05-11 16:06:03.529822,surprise,1.0,,Guest,image,streamlit
+2026-05-11 16:06:13.042028,surprise,1.0,,Guest,image,streamlit
+2026-05-11 16:06:20.313716,surprise,0.996,,Guest,image,streamlit
+2026-05-11 16:08:44.374065,surprise,0.996,,Guest,image,streamlit
+2026-05-11 16:09:15.796442,happy,0.5425899950715296,,Guest,voice,streamlit
+2026-05-11 16:57:57.107686,surprise,0.997,,Apoorv Mittal,face,webcam
+2026-05-11 16:58:04.328230,surprise,0.997,,Guest,face,webcam
+2026-05-11 16:58:38.715537,fear,0.89,I got scared today after seeing a big tiger in the forest.,Guest,text,streamlit
+2026-05-11 16:59:51.095065,surprise,0.26,Please save me from getting the lowest marks in my exam.,Guest,multimodal,streamlit
+2026-05-11 17:00:16.388870,fear,0.923,,Guest,image,streamlit
+2026-05-11 17:45:18.605501,surprise,0.994,,Guest,image,streamlit
+2026-05-11 17:46:04.990883,fear,0.641,,Guest,face,webcam
+2026-05-11 17:46:55.594528,surprise,0.26,Please save me from getting the lowest marks in my exam.,Guest,multimodal,streamlit
+2026-05-11 17:49:45.818053,anger,0.1884634677573398,,Guest,voice,streamlit
+2026-05-11 17:50:56.760286,anger,0.1884634677573398,,Guest,voice,streamlit
+2026-05-11 19:28:23.025879,neutral,0.545,,Guest,face,webcam
+2026-05-11 19:33:12.486514,happy,0.5425899950715296,,Guest,voice,streamlit
+2026-05-11 20:37:51.961959,neutral,0.473,,Guest,face,webcam
+2026-05-11 20:37:56.926247,neutral,0.473,,Guest,face,webcam
+2026-05-11 20:38:01.284088,neutral,0.473,,Guest,face,webcam
+2026-05-11 20:39:44.945485,sad,0.47,"मैं अब कॉलेज नहीं जाना चाहता, क्योंकि मैं अपने पहले सेमेस्टर में फेल हो गया हूँ।",Guest,text,streamlit
+2026-05-11 20:41:07.748375,happy,0.28,"मैं सिर्फ अपने माता-पिता के साथ रहना चाहता हूँ, अकेला नहीं।",Guest,multimodal,streamlit
+2026-05-11 20:41:45.073566,happy,0.28,"मैं सिर्फ अपने माता-पिता के साथ रहना चाहता हूँ, अकेला नहीं।",Guest,multimodal,streamlit
+2026-05-11 20:42:15.264177,happy,0.988,,Guest,image,streamlit
+2026-05-11 20:42:22.648233,happy,0.988,,Guest,image,streamlit
+2026-05-11 20:42:32.083380,happy,1.0,,Guest,image,streamlit
+2026-05-11 20:42:40.615702,happy,1.0,,Guest,image,streamlit
+2026-05-11 20:51:59.363011,happy,0.747,,Guest,face,webcam
+2026-05-11 20:53:54.644362,happy,0.2734951238129524,,Guest,voice,streamlit
+2026-05-11 21:16:49.130494,sad,0.29,"मैं सिर्फ अपने माता-पिता के साथ रहना चाहता हूँ, अकेला नहीं।",Guest,multimodal,streamlit
+2026-05-11 21:18:27.948132,neutral,0.79,"
+नहीं बदल सकते हैं हम खुद को औरों के हिसाब से,
+एक लिबास हमें भी दिया हैं खुदा ने अपने हिसाब से!",Alok Mittal,text,streamlit
+2026-05-11 21:19:04.713013,neutral,0.53,"आपसे जो भी झुक कर मिलता होगा,
+यकीनन उसका कद आपसे ऊँचा होगा!",Alok Mittal,text,streamlit
+2026-05-11 21:19:30.926788,neutral,0.88,"समेट कर सारे जज़्बात रख दिये सिरहाने,
+थोड़े सुकून के हक़दार हम भी तो है!",Alok Mittal,text,streamlit
+2026-05-11 21:20:10.189018,neutral,0.7,"किसी ने पूछा,
+इतना अच्छा कैसे लिख लेते हो
+मैंने कहा दिल तोड़ना पड़ता है
+लफ्जों को जोड़ने से पहले !",Alok Mittal,text,streamlit
+2026-05-11 21:20:55.135889,sad,0.54,"रात भर जागते हैं तेरी यादों के सहारे,
+नींद भी अब रूठ गई है हमसे।
+क्या करें इस दिल का जो तुझे भूलता नहीं,
+बस धड़कता रहता है तेरे इंतजार में।",Alok Mittal,text,streamlit
+2026-05-11 21:21:27.677135,happy,0.997,,Alok Mittal,image,streamlit
+2026-05-11 21:21:42.717401,neutral,0.432,,Alok Mittal,image,streamlit
+2026-05-12 07:50:38.458331,neutral,0.999,,Guest,face,webcam
+2026-05-12 07:50:49.145108,neutral,0.978,,Guest,face,webcam
+2026-05-12 11:48:13.527339,neutral,0.51,,Apoorv Mittal,face,webcam
+2026-05-12 11:48:28.619189,neutral,0.976,,Apoorv Mittal,image,streamlit
+2026-05-12 11:48:38.870313,neutral,0.976,,Apoorv Mittal,image,streamlit
+2026-05-12 11:50:50.251799,happy,0.1133131551581045,,Apoorv Mittal,voice,streamlit
+2026-05-12 11:54:27.891005,happy,0.16,I have won a silver medal in my sangathan sports competition at Amity today.,Apoorv Mittal,multimodal,streamlit
+2026-05-12 14:04:12.740922,fear,0.841,,Guest,face,webcam
+2026-05-12 14:04:20.803021,happy,0.997,,Guest,face,webcam
+2026-05-12 14:04:35.104924,happy,0.997,,Guest,face,webcam
+2026-05-12 14:05:46.710455,sad,0.87,"
+J'ai perdu mes bijoux hier en marchant dans la rue.",Apoorv Mittal,text,streamlit
+2026-05-12 14:07:06.972430,fear,0.29,I went to see a 3-D movie today morning.,Apoorv Mittal,multimodal,streamlit
+2026-05-12 14:07:42.964834,neutral,0.976,,Apoorv Mittal,image,streamlit
+2026-05-12 14:10:25.068169,neutral,0.1062269377944893,,Apoorv Mittal,voice,streamlit
+2026-05-12 14:10:48.169237,neutral,0.1062269377944893,,Apoorv Mittal,voice,streamlit
+2026-05-12 14:11:05.637593,neutral,0.1062269377944893,,Guest,voice,streamlit
+2026-05-12 22:40:31.729866,happy,0.988,,Guest,image,streamlit
+2026-05-12 22:40:45.786449,surprise,0.993,,Guest,image,streamlit
+2026-05-13 21:25:11.050524,sad,0.529,,Guest,face,webcam
+2026-05-13 21:25:55.489902,sad,0.82,I saw my mother crying yesterday.,Guest,text,streamlit
+2026-05-13 22:47:23.371849,surprise,1.0,,Guest,face,webcam
+2026-05-13 22:47:55.397638,neutral,0.44,I saw a german shephard in the park and ran away.,Guest,text,streamlit
+2026-05-13 22:52:43.745864,neutral,0.537,,Guest,face,webcam
+2026-05-13 22:53:39.646880,neutral,0.943,,Guest,image,streamlit
+2026-05-13 22:54:40.787084,neutral,0.537,,Guest,face,webcam
+2026-05-13 23:00:36.595198,happy,0.33,I am feeling very tired and bored today.,Guest,multimodal,streamlit
+2026-05-14 09:49:45.052815,neutral,0.907,,Guest,face,webcam
+2026-05-14 09:50:56.542129,neutral,0.33,I got scared today after seeing a german shephard in the park while walking.,Guest,multimodal,streamlit
+2026-05-14 11:57:22.054765,fear,0.603,,Apoorv Mittal,face,webcam
+2026-05-14 11:57:29.521772,fear,0.972,,Apoorv Mittal,face,webcam
+2026-05-14 16:14:46.684302,neutral,0.981,,Guest,face,webcam
+2026-05-14 19:14:03.655015,fear,0.878,,Guest,face,webcam
+2026-05-15 10:39:44.503102,sad,0.993,,Apoorv Mittal,face,webcam
+2026-05-15 10:39:52.537451,sad,0.97,,Apoorv Mittal,face,webcam
+2026-05-15 10:40:10.789848,sad,0.999,,Apoorv Mittal,face,webcam
+2026-05-15 10:40:19.004500,sad,0.998,,Apoorv Mittal,face,webcam
+2026-05-15 10:42:49.027001,neutral,0.5,I suppose what is this bad smell of rotten eggs besides me!!,Apoorv Mittal,multimodal,streamlit

@@ -1,299 +1,317 @@
-# ------------------------------------------------------------
-# EmotionalWell AI Backend - UPDATED LOGGING VERSION
-# ------------------------------------------------------------
-import os
-import sys
-import shutil
-import io
-import time
+from fastapi import FastAPI, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
+from typing import Optional
+from datetime import datetime
 import threading
-import datetime
-import csv
-import base64
-import re
-
-# 1. SILENCE TENSORFLOW WARNINGS
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-os.environ["HTTP_TIMEOUT"] = "300"
-
-# 2. MANUALLY INJECT FFMPEG INTO PATH (Critical for Windows)
-ffmpeg_path = r"C:\ffmpeg\bin"
-if os.path.exists(ffmpeg_path):
-    os.environ["PATH"] += os.pathsep + ffmpeg_path
-
-import tensorflow as tf
-import librosa
-import pickle
+import pandas as pd
+import os
+import time
 import numpy as np
 import cv2
-import pandas as pd
-from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
-from typing import Optional, Any
-from pydub import AudioSegment
-from transformers import pipeline
 from deepface import DeepFace
-from deep_translator import GoogleTranslator
-
-# 3. CONFIGURE PYDUB EXPLICITLY
-AudioSegment.converter = r"C:\ffmpeg\bin\ffmpeg.exe"
-AudioSegment.ffprobe = r"C:\ffmpeg\bin\ffprobe.exe"
+from transformers import pipeline, MarianMTModel, MarianTokenizer
+from langdetect import detect
+from speechbrain.inference import EncoderClassifier
+import torchaudio
+import torch
 
 # ==========================================
-# GLOBALS & PATHS
+# GLOBALS
 # ==========================================
+
 MOOD_LOG_FILE = "mood_log.csv"
 csv_lock = threading.Lock()
 START_TIME = time.time()
 
-MODEL_DIR = "trained_text_emotion_model"
-VOICE_MODEL_PATH = os.path.join(MODEL_DIR, "voice_emotion_model.h5")
-VOICE_LABEL_PATH = os.path.join(MODEL_DIR, "voice_emotion_labels.pkl")
+# ==========================================
+# INITIALIZE FASTAPI
+# ==========================================
+
+app = FastAPI(title="EmotionalWell AI Backend - Flutter Compatible")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Flutter mobile/web
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True
+)
+
+# ==========================================
+# CSV SETUP & CLEANUP
+# ==========================================
+
+def cleanup_csv():
+    try:
+        if not os.path.exists(MOOD_LOG_FILE):
+            df_init = pd.DataFrame(columns=[
+                "timestamp","user","emotion","confidence","text","source","platform"
+            ])
+            df_init.to_csv(MOOD_LOG_FILE, index=False)
+            return
+
+        df = pd.read_csv(MOOD_LOG_FILE, engine="python")
+        df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
+        df = df.loc[:, ~df.columns.duplicated()]
+        df["user"] = df.get("user", "Guest").fillna("Guest").astype(str).str.strip()
+        df.loc[df["user"] == "", "user"] = "Guest"
+        df.to_csv(MOOD_LOG_FILE, index=False)
+    except Exception as e:
+        print("CSV cleanup error:", e)
+
+@app.on_event("startup")
+def startup_cleanup():
+    print("DEBUG: startup cleanup running")
+    cleanup_csv()
+
+# ==========================================
+# Pydantic Models
+# ==========================================
+
+class TextData(BaseModel):
+    text: str
+
+class MoodLog(BaseModel):
+    user: str
+    emotion: str
+    confidence: float
+    text: Optional[str] = ""
+    source: Optional[str] = "manual"
+    platform: Optional[str] = "unknown"
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+class FusionInput(BaseModel):
+    text_emotion: Optional[str] = None
+    text_confidence: Optional[float] = 0.0
+    face_emotion: Optional[str] = None
+    face_confidence: Optional[float] = 0.0
+    voice_emotion: Optional[str] = None
+    voice_confidence: Optional[float] = 0.0
+
+# ==========================================
+# TRANSLATION MODEL
+# ==========================================
+
+translator_model_name = "Helsinki-NLP/opus-mt-mul-en"
+translator_tokenizer = MarianTokenizer.from_pretrained(translator_model_name)
+translator_model = MarianMTModel.from_pretrained(translator_model_name)
+
+def translate_to_english(text: str) -> str:
+    text = text.strip()
+    if not text:
+        return ""
+    try:
+        detected_lang = detect(text)
+        if detected_lang == "en":
+            return text
+        inputs = translator_tokenizer(text, return_tensors="pt", truncation=True, max_length=128)
+        translated = translator_model.generate(**inputs, max_length=128, num_beams=5, do_sample=False)
+        return translator_tokenizer.decode(translated[0], skip_special_tokens=True)
+    except Exception as e:
+        print("Translation error:", e)
+        return text
+
+# ==========================================
+# TEXT EMOTION MODEL (unchanged)
+# ==========================================
+
+text_model = pipeline("text-classification", model="SamLowe/roberta-base-go_emotions", top_k=None)
 
 EMOTION_MAP = {
-    "joy": "happy", "sadness": "sad", "anger": "angry",
-    "fear": "fearful", "surprise": "surprised", "disgust": "disgusted",
-    "happy": "happy", "sad": "sad", "fear": "fearful", "neutral": "neutral"
+    "admiration": "happy","amusement": "happy","approval": "happy",
+    "joy": "happy","love": "happy","optimism": "happy",
+    "gratitude": "happy","excitement": "happy",
+    "anger": "anger","annoyance": "anger","disapproval": "anger",
+    "fear": "fear","nervousness": "fear",
+    "sadness": "sad","disappointment": "sad",
+    "grief": "sad","remorse": "sad",
+    "surprise": "surprise","realization": "surprise",
+    "neutral": "neutral"
 }
 
 # ==========================================
-# MODEL INITIALIZATION
+# FACE EMOTION
 # ==========================================
-try:
-    text_model = pipeline(
-        "text-classification",
-        model="j-hartmann/emotion-english-distilroberta-base",
-        return_all_scores=True
-    )
-    voice_model = tf.keras.models.load_model(VOICE_MODEL_PATH, compile=False)
-    with open(VOICE_LABEL_PATH, "rb") as f:
-        voice_encoder = pickle.load(f)
-    print("  All AI Models loaded successfully.")
-except Exception as e:
-    print(f"  Warning: Model loading issues: {e}")
-
-app = FastAPI(title="EmotionalWell AI Backend")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
-
-
-# ==========================================
-# DATA MODELS
-# ==========================================
-class TextData(BaseModel):
-    text: str
-    username: Optional[str] = "Guest"
-    source: Optional[str] = "text_input"
-
-
-class FaceData(BaseModel):
-    image_base64: str
-    username: Optional[str] = "Guest"
-    source: Optional[str] = "face_input"
-
-
-class FusionInput(BaseModel):
-    username: str = "Guest"
-    text_emotion: Optional[str] = None
-    text_confidence: Any = 0.0
-    face_emotion: Optional[str] = None
-    face_confidence: Any = 0.0
-    voice_emotion: Optional[str] = None
-    voice_confidence: Any = 0.0
-
-
-# ==========================================
-# HELPERS
-# ==========================================
-def log_to_csv(emotion, confidence, source, username):
-    """
-    Saves entry in format: Timestamp, Emotion, Confidence, Source, User, Extra1, Extra2
-    """
-    try:
-        with csv_lock:
-            with open(MOOD_LOG_FILE, mode='a', newline='') as f:
-                writer = csv.writer(f)
-                writer.writerow([
-                    datetime.datetime.now(),
-                    emotion,
-                    confidence,
-                    source,
-                    username,
-                    "",
-                    ""
-                ])
-    except Exception as e:
-        print(f"  CSV Error: {e}")
-
-
-def translate_to_english(text: str) -> str:
-    try:
-        return GoogleTranslator(source='auto', target='en').translate(text)
-    except Exception:
-        return text
-
-
-def clean_to_float(val):
-    try:
-        if val is None: return 0.0
-        val_str = str(val).lower()
-        if "tensor" in val_str:
-            match = re.search(r"(\d+\.\d+)", val_str)
-            num = float(match.group(1)) if match else 0.0
-        else:
-            num = float(val)
-        if 0.0 < num <= 1.0: return round(num * 100, 2)
-        return round(num, 2)
-    except:
-        return 0.0
-
-
-# ==========================================
-# ENDPOINTS
-# ==========================================
-
-@app.post("/predict-text")
-async def predict_text(data: TextData):
-    text = data.text.strip()
-    username = data.username if data.username else "Guest"
-    source = data.source if data.source else "text_input"
-
-    if not text: return JSONResponse(content={"emotion": "neutral", "confidence": 0.0})
-    try:
-        translated = translate_to_english(text)
-        results = text_model(translated)[0]
-        results = sorted(results, key=lambda x: x["score"], reverse=True)
-        top_res = results[0]
-
-        conf = clean_to_float(top_res["score"])
-        emotion = EMOTION_MAP.get(top_res["label"].lower(), "neutral")
-
-        if conf < 30.0: emotion, conf = "neutral", 0.0
-
-        # LOG DATA
-        log_to_csv(emotion, conf, source, username)
-
-        return JSONResponse(content={
-            "emotion": emotion,
-            "confidence": conf,
-            "translated_text": translated
-        })
-    except Exception as e:
-        print(f" Text Error: {e}")
-        return JSONResponse(content={"emotion": "neutral", "confidence": 0.0})
-
 
 @app.post("/predict-face")
-async def predict_face(
-        file: Optional[UploadFile] = File(None),
-        username: str = Form("Guest"),
-        source: str = Form("face_input")
-):
+async def predict_face(file: UploadFile = File(...)):
     try:
-        if not file: return JSONResponse(content={"emotion": "neutral", "confidence": 0.0})
-
+        print(f"[Face API] Received file: filename={file.filename}, content_type={file.content_type}")
         contents = await file.read()
-        nparr = np.frombuffer(contents, np.uint8)
-        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        np_arr = np.frombuffer(contents, np.uint8)
+        img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
 
-        analysis = DeepFace.analyze(img_path=img, actions=['emotion'], enforce_detection=False)
-        res = analysis[0] if isinstance(analysis, list) else analysis
-        label = max(res['emotion'], key=res['emotion'].get)
+        if img is None:
+            print("[Face API] ERROR: Could not decode image")
+            return {"error": "Invalid image format", "status": 422}
 
-        conf = round(float(res['emotion'][label]), 2)
-        emotion = EMOTION_MAP.get(label.lower(), label.lower())
+        img = cv2.resize(img, (640, 480))
+        result = DeepFace.analyze(img, actions=["emotion"], detector_backend="retinaface", enforce_detection=False, align=True)
+        if isinstance(result, list):
+            result = result[0]
 
-        # LOG DATA
-        log_to_csv(emotion, conf, source, username)
+        emotion = result.get("dominant_emotion", "neutral")
+        confidence = float(result.get("emotion", {}).get(emotion, 0)) / 100
 
-        return JSONResponse(content={"emotion": emotion, "confidence": conf})
+        print(f"[Face API] Detected emotion: {emotion}, confidence: {confidence}")
+        return {"emotion": emotion, "confidence": round(confidence, 2)}
     except Exception as e:
-        print(f" Face Error: {e}")
-        return JSONResponse(content={"emotion": "neutral", "confidence": 0.0})
+        print(f"[Face API] Exception: {e}")
+        return {"error": str(e), "status": 500}
+# ==========================================
+# VOICE EMOTION
+# ==========================================
 
+ser_model = EncoderClassifier.from_hparams(
+    source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
+    savedir="tmp_ser_model"
+)
+
+VOICE_EMOTION_MAP = {
+    "HAP": "happy",
+    "SAD": "sad",
+    "ANG": "angry",
+    "NEU": "neutral",
+    "FEA": "fear",
+    "DIS": "disgust",
+    "SUR": "surprise"
+}
 
 @app.post("/predict-voice")
-async def predict_voice(
-        file: UploadFile = File(...),
-        username: str = Form("Guest"),
-        source: str = Form("voice_input")
-):
+async def predict_voice(file: UploadFile = File(...)):
     try:
-        audio_data = await file.read()
-        audio_stream = io.BytesIO(audio_data)
-        audio = AudioSegment.from_file(audio_stream).set_frame_rate(22050).set_channels(1)
-        samples = np.array(audio.get_array_of_samples()).astype(np.float32) / 32768.0
+        contents = await file.read()
+        tmp_file = f"temp_{int(time.time()*1000)}.wav"
+        with open(tmp_file, "wb") as f:
+            f.write(contents)
 
-        mfccs = librosa.feature.mfcc(y=samples, sr=22050, n_mfcc=40)
-        mfccs = np.pad(mfccs, ((0, 0), (0, max(0, 174 - mfccs.shape[1]))))[:, :174]
-        features = np.expand_dims(np.expand_dims(mfccs, axis=0), -1)
+        signal, fs = torchaudio.load(tmp_file)
+        if signal.shape[0] > 1:
+            signal = signal.mean(dim=0, keepdim=True)
+        signal = signal.unsqueeze(0)
 
-        prediction = voice_model.predict(features)
-        probs = prediction[0].tolist()
-        best_idx = int(np.argmax(probs))
+        with torch.no_grad():
+            prediction = ser_model.classify_batch(signal)
+        if isinstance(prediction, dict):
+            emotion_code = prediction.get("label", "NEU")
+            confidence = float(prediction.get("score", 0.0))
+        else:
+            emotion_code = "NEU"
+            confidence = 0.0
 
-        final_conf = clean_to_float(probs[best_idx])
-        labels = {0: "angry", 1: "disgust", 2: "fear", 3: "happy", 4: "neutral", 5: "sad", 6: "surprise"}
-        emotion = labels.get(best_idx, "neutral")
+        emotion = VOICE_EMOTION_MAP.get(emotion_code, emotion_code.lower())
+        confidence = min(max(confidence, 0.0), 1.0)
 
-        # LOG DATA
-        log_to_csv(emotion, final_conf, source, username)
+        if os.path.exists(tmp_file):
+            os.remove(tmp_file)
 
-        return JSONResponse(content={"emotion": emotion, "confidence": final_conf})
+        return {"emotion": emotion, "confidence": round(confidence, 2)}
     except Exception as e:
-        print(f" VOICE ERROR: {e}")
-        return JSONResponse(content={"emotion": "neutral", "confidence": 0.0})
+        print("Voice prediction failed:", e)
+        return {"emotion": "neutral", "confidence": 0.0}
 
+# ==========================================
+# MULTIMODAL FUSION
+# ==========================================
 
 @app.post("/fusion")
-async def fusion(data: FusionInput):
+async def multimodal_fusion(data: FusionInput):
+    PRIORITY_ORDER = ["voice", "face", "text"]
+    inputs = [
+        (data.text_emotion, float(data.text_confidence or 0.0), "text"),
+        (data.face_emotion, float(data.face_confidence or 0.0), "face"),
+        (data.voice_emotion, float(data.voice_confidence or 0.0), "voice")
+    ]
+    inputs = [(e, c, m) for e, c, m in inputs if e]
+    if not inputs:
+        return {"final_emotion": "neutral", "overall_confidence": 0.0}
+
+    weighted_scores = {}
+    for emotion, confidence, modality in inputs:
+        weighted_scores[emotion] = weighted_scores.get(emotion, 0.0) + confidence
+
+    max_score = max(weighted_scores.values())
+    top_emotions = [emo for emo, score in weighted_scores.items() if score == max_score]
+
+    if len(top_emotions) > 1:
+        final_emotion = top_emotions[0]
+        for priority in PRIORITY_ORDER:
+            for e, _, m in inputs:
+                if e in top_emotions and m == priority:
+                    final_emotion = e
+                    break
+            else:
+                continue
+            break
+    else:
+        final_emotion = top_emotions[0]
+
+    contributing_confidences = [c for e, c, _ in inputs if e == final_emotion]
+    overall_confidence = round(float(np.mean(contributing_confidences)), 2)
+    return {"final_emotion": final_emotion, "overall_confidence": overall_confidence}
+
+# ==========================================
+# LOGGING, GET LOGS & HEALTH CHECK
+# ==========================================
+
+@app.post("/save-log")
+async def save_log(log: MoodLog):
+    safe_user = (log.user or "").strip() or "Guest"
+    new_entry = {
+        "timestamp": log.timestamp,
+        "user": safe_user,
+        "emotion": log.emotion,
+        "confidence": log.confidence,
+        "text": log.text,
+        "source": log.source,
+        "platform": log.platform
+    }
     try:
-        emotions = []
-        inputs = [
-            (data.text_emotion, clean_to_float(data.text_confidence)),
-            (data.face_emotion, clean_to_float(data.face_confidence)),
-            (data.voice_emotion, clean_to_float(data.voice_confidence))
-        ]
+        df = pd.read_csv(MOOD_LOG_FILE, engine="python")
+    except Exception:
+        df = pd.DataFrame(columns=new_entry.keys())
+    df = pd.concat([df, pd.DataFrame([new_entry])], ignore_index=True)
+    df = df.loc[:, ~df.columns.duplicated()]
+    with csv_lock:
+        df.to_csv(MOOD_LOG_FILE, index=False)
+    return {"status": "saved"}
 
-        for emo, conf in inputs:
-            if emo and str(emo).lower() != "neutral" and conf > 5.0:
-                emotions.append((str(emo).lower(), conf))
-
-        if not emotions:
-            return JSONResponse(content={"final_emotion": "neutral", "overall_confidence": 0.0})
-
-        scores = {}
-        for emo, conf in emotions:
-            scores[emo] = scores.get(emo, 0) + conf
-
-        winner = max(scores, key=scores.get)
-        avg_conf = scores[winner] / float(len(emotions))
-
-        # LOG DATA
-        log_to_csv(winner, avg_conf, "fusion_input", data.username)
-
-        return JSONResponse(content={"final_emotion": str(winner), "overall_confidence": round(avg_conf, 2)})
+@app.get("/get-logs/{user}")
+async def get_logs(user: str):
+    try:
+        df = pd.read_csv(MOOD_LOG_FILE, engine="python", on_bad_lines="skip")
+        df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
+        df = df.loc[:, ~df.columns.duplicated()]
+        df["user"] = df["user"].astype(str).str.strip()
+        user_logs = df[df["user"].str.lower() == user.strip().lower()]
+        return user_logs.fillna("").to_dict(orient="records")
     except Exception as e:
-        return JSONResponse(content={"final_emotion": "neutral", "overall_confidence": 0.0})
-
+        return {"status": "error", "message": str(e)}
 
 @app.get("/get-logs-all")
 async def get_logs_all():
     try:
-        if not os.path.exists(MOOD_LOG_FILE): return []
-        # Return raw CSV data as list of dictionaries
-        df = pd.read_csv(MOOD_LOG_FILE, names=["timestamp", "emotion", "confidence", "source", "user", "ex1", "ex2"])
+        df = pd.read_csv(MOOD_LOG_FILE, engine="python", on_bad_lines="skip")
+        df = df.loc[:, ~df.columns.str.contains("^Unnamed")]
+        df = df.loc[:, ~df.columns.duplicated()]
         return df.fillna("").to_dict(orient="records")
-    except Exception:
-        return []
-
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
 
 @app.get("/health")
-async def health(): return {"status": "ok", "uptime": round(time.time() - START_TIME, 2)}
+async def health_check():
+    return {
+        "status": "ok",
+        "message": "EmotionalWell AI Backend Running",
+        "version": "WPR-14",
+        "uptime_seconds": round(time.time() - START_TIME, 2)
+    }
 
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="127.0.0.1", port=8001)
+@app.get("/mobile-health")
+def mobile_health():
+    return {
+        "status": "ok",
+        "app": "EmotionalWell AI",
+        "backend_version": "WPR-14"
+    }

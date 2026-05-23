@@ -8,6 +8,7 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import Optional
+print("🔥 RUNNING backend.py")   # ✅ ADD HERE
 from deepface import DeepFace
 import numpy as np
 import cv2
@@ -17,7 +18,7 @@ import os
 from datetime import datetime
 import time
 from langdetect import detect
-from speechbrain.inference import EncoderClassifier
+from speechbrain.inference import foreign_class
 import threading
 
 # ==========================================
@@ -30,7 +31,8 @@ csv_lock = threading.Lock()
 # CSV CLEANUP FUNCTION (AUTO + DEBUG)
 # ==========================================
 
-MOOD_LOG_FILE = "mood_log.csv"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MOOD_LOG_FILE = os.path.join(BASE_DIR, "mood_log.csv")
 
 def cleanup_csv():
     try:
@@ -123,11 +125,11 @@ class FusionInput(BaseModel):
 # LOAD SER MODEL
 # ==========================================
 
-ser_model = EncoderClassifier.from_hparams(
+ser_model = foreign_class(
     source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
-    savedir="tmp_ser_model"
+    pymodule_file="custom_interface.py",
+    classname="CustomEncoderWav2vec2Classifier"
 )
-
 
 # ==========================================
 # HEALTH CHECK
@@ -158,79 +160,76 @@ if not os.path.exists(MOOD_LOG_FILE):
     df_init.to_csv(MOOD_LOG_FILE, index=False)
 
 # ==========================================
-# MULTILINGUAL TRANSLATION (FINAL FIX)
+# MULTILINGUAL TRANSLATION (FINAL WORKING FIX)
 # ==========================================
 
-from transformers import MarianMTModel, MarianTokenizer
-from langdetect import detect
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+import torch
 
-# Load multilingual → English model
-translator_model_name = "Helsinki-NLP/opus-mt-mul-en"
+# Load model + tokenizer
+translator_tokenizer = AutoTokenizer.from_pretrained(
+    "facebook/nllb-200-distilled-600M"
+)
+translator_model = AutoModelForSeq2SeqLM.from_pretrained(
+    "facebook/nllb-200-distilled-600M"
+)
 
-translator_tokenizer = MarianTokenizer.from_pretrained(translator_model_name)
-translator_model = MarianMTModel.from_pretrained(translator_model_name)
+# Device setup
+device = "cuda" if torch.cuda.is_available() else "cpu"
+translator_model.to(device)
 
 
 def translate_to_english(text: str) -> str:
-    """
-    Reliable multilingual → English translation
-    Works well for short phrases and idioms
-    """
-
-    text = text.strip()
-    if not text:
-        return ""
-
     try:
-        detected_lang = detect(text)
-        print(f"DEBUG detected_lang: {detected_lang}")
+        print("\n🔥 TRANSLATE FUNCTION CALLED")
+        print("📝 INPUT:", text)
 
-        # Skip translation if already English
-        if detected_lang == "en":
+        # Handle empty input
+        if not text or not text.strip():
+            print("⚠️ Empty input")
             return text
+
+        # 🔥 Force source language (French for now)
+        translator_tokenizer.src_lang = "fra_Latn"
 
         # Tokenize
         inputs = translator_tokenizer(
             text,
             return_tensors="pt",
             truncation=True,
-            max_length=128
+            max_length=512
         )
+
+        # Move to device
+        inputs = {k: v.to(device) for k, v in inputs.items()}
+
+        # 🔥 FIX: Correct way to get target language ID
+        target_lang_id = translator_tokenizer.convert_tokens_to_ids("eng_Latn")
 
         # Generate translation
-        translated = translator_model.generate(
+        translated_tokens = translator_model.generate(
             **inputs,
-            max_length=128,
-            num_beams=5,
-            do_sample=False
+            forced_bos_token_id=target_lang_id,
+            max_length=256
         )
 
-        translated_text = translator_tokenizer.decode(
-            translated[0],
+        # Decode output
+        translated_text = translator_tokenizer.batch_decode(
+            translated_tokens,
             skip_special_tokens=True
-        )
+        )[0]
 
-        print(f"DEBUG translated_text: {translated_text}")
+        print("✅ TRANSLATED OUTPUT:", translated_text)
 
         return translated_text
 
     except Exception as e:
-        print("Translation error:", e)
+        print("❌ Translation Error:", e)
         return text
 # ==========================================
-# TEXT EMOTION MODEL (Fixed & Multilingual)
+# TEXT EMOTION MODEL
 # ==========================================
 
-from fastapi import FastAPI
-from pydantic import BaseModel
-from transformers import pipeline
-from langdetect import detect
-
-app = FastAPI()
-
-# ==============================
-# Text Emotion Pipeline
-# ==============================
 text_model = pipeline(
     "text-classification",
     model="SamLowe/roberta-base-go_emotions",
@@ -248,110 +247,113 @@ EMOTION_MAP = {
     "surprise": "surprise","realization": "surprise",
     "neutral": "neutral"
 }
-
-# ==============================
-# Input Model
-# ==============================
-class TextData(BaseModel):
-    text: str
-
-# ==============================
-# Predict Text Emotion
-# ==============================
 @app.post("/predict-text")
 async def predict_text(data: TextData):
+    print("\n================ TEXT API CALLED ================")
+
     text = data.text.strip()
+    print("📝 INPUT TEXT:", text)
+
     if not text:
-        return {"original_text": "", "translated_text": "", "emotion": "neutral", "confidence": 0.0}
+        print("⚠️ Empty input received")
+        return {
+            "original_text": "",
+            "translated_text": "",
+            "emotion": "neutral",
+            "confidence": 0.0
+        }
 
     try:
-        # Translate to English
+        # 🔥 STEP 1: TRANSLATION
+        print("\n🔄 Calling translate_to_english()...")
         translated_text = translate_to_english(text)
-        print(f"DEBUG Original: {text}")
-        print(f"DEBUG Translated: {translated_text}")
 
-        # Pipeline expects a list of strings
-        results = text_model([translated_text])[0]
-        # Sort by score descending
+        print("✅ TRANSLATED TEXT:", translated_text)
+
+        # 🔥 CHECK IF TRANSLATION FAILED
+        if translated_text == text:
+            print("⚠️ WARNING: Translation output SAME as input")
+
+        # 🔥 STEP 2: EMOTION MODEL
+        print("\n🤖 Running emotion model...")
+        results = text_model(translated_text)[0]
+
+        print("📊 RAW MODEL OUTPUT:", results)
+
         results = sorted(results, key=lambda x: x["score"], reverse=True)
 
         top_label = results[0]["label"]
         top_score = float(results[0]["score"])
 
-        # Map to generic emotion
+        print(f"🏆 TOP LABEL: {top_label}, SCORE: {top_score}")
+
         emotion = EMOTION_MAP.get(top_label, "neutral")
+
+        # 🔥 CONFIDENCE FILTERING
+        if top_score < 0.30:
+            print("⚠️ Low confidence → forcing neutral")
+            emotion = "neutral"
+
+        if len(results) > 1:
+            second_score = float(results[1]["score"])
+            if abs(top_score - second_score) < 0.03:
+                print("⚠️ Ambiguous prediction → forcing neutral")
+                emotion = "neutral"
+
         confidence = round(top_score, 2)
 
-        # Handle low confidence
-        if confidence < 0.3:
-            emotion = "neutral"
-            confidence = 0.0
+        print("🎯 FINAL EMOTION:", emotion)
+        print("📈 FINAL CONFIDENCE:", confidence)
 
     except Exception as e:
-        print(f"DEBUG Text prediction failed: {e}")
+        print("❌ ERROR in /predict-text:", e)
+
         translated_text = text
         emotion = "neutral"
         confidence = 0.0
 
-    return {
+    response = {
         "original_text": text,
         "translated_text": translated_text,
         "emotion": emotion,
         "confidence": confidence
     }
+
+    print("\n🚀 FINAL API RESPONSE:", response)
+    print("================================================\n")
+
+    return response
 # ==========================================
-# FACE EMOTION (IMPROVED ACCURACY)
+# FACE EMOTION
 # ==========================================
 
 @app.post("/predict-face")
 async def predict_face(file: UploadFile = File(...)):
-
     try:
         contents = await file.read()
-
         np_arr = np.frombuffer(contents, np.uint8)
         img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
 
         if img is None:
             return {"error": "Invalid image format"}
 
-        # Improve detection reliability
         img = cv2.resize(img, (640, 480))
-
-        result = DeepFace.analyze(
-            img,
-            actions=["emotion"],
-            detector_backend="retinaface",   # ⭐ much more accurate
-            enforce_detection=False,
-            align=True
-        )
+        result = DeepFace.analyze(img, actions=["emotion"], enforce_detection=False)
 
         if isinstance(result, list):
             result = result[0]
 
         emotion = result.get("dominant_emotion", "neutral")
+        confidence = float(result.get("emotion", {}).get(emotion, 0))
 
-        confidence = float(
-            result.get("emotion", {}).get(emotion, 0)
-        ) / 100   # normalize to 0–1
-
-        return {
-            "emotion": emotion,
-            "confidence": round(confidence, 2)
-        }
+        return {"emotion": emotion, "confidence": confidence}
 
     except Exception as e:
         return {"error": str(e)}
 
 # ==========================================
-# VOICE EMOTION MODEL (Fixed for SpeechBrain v1.0+)
+# VOICE EMOTION MAP (WPR-14 FIX)
 # ==========================================
-
-from fastapi import UploadFile, File
-import torchaudio
-import torch
-import time
-import os
 
 VOICE_EMOTION_MAP = {
     "HAP": "happy",
@@ -366,104 +368,74 @@ VOICE_EMOTION_MAP = {
 @app.post("/predict-voice")
 async def predict_voice(file: UploadFile = File(...)):
     try:
-        # Save uploaded audio
         contents = await file.read()
-        tmp_file = f"temp_{int(time.time()*1000)}.wav"
-        with open(tmp_file, "wb") as f:
+
+        # safer temporary filename (prevents conflicts)
+        import time
+        filename = f"temp_audio_{int(time.time()*1000)}.wav"
+
+        with open(filename, "wb") as f:
             f.write(contents)
 
-        # Load audio
-        signal, fs = torchaudio.load(tmp_file)  # [channels, samples]
-        if signal.shape[0] > 1:
-            signal = signal.mean(dim=0, keepdim=True)  # convert to mono
-        signal = signal.unsqueeze(0)  # [1, 1, samples] for batch
+        prediction = ser_model.classify_file(filename)
+        prediction_str = str(prediction)
 
-        # Run model
-        with torch.no_grad():
-            prediction = ser_model.classify_batch(signal)  # SpeechBrain v1.0+ batch inference
-        print(f"DEBUG Raw Voice Prediction: {prediction}")
+        # Example: "HAP (100.0%)"
+        emotion_code = prediction_str.split(" ")[0]
 
-        # Handle dict output: {"label": ..., "score": ...}
-        if isinstance(prediction, dict):
-            emotion_code = prediction.get("label", "NEU")
-            confidence = float(prediction.get("score", 0.0))
-        elif isinstance(prediction, str):
-            # legacy string output: "HAP (98.0%)"
-            emotion_code = prediction.split(" ")[0]
-            confidence = float(prediction.split("(")[1].replace("%)", "")) / 100
-        else:
-            # fallback
-            emotion_code = "NEU"
-            confidence = 0.0
+        confidence = float(
+            prediction_str.split("(")[1].replace("%)", "")
+        ) / 100
 
-        # Map to generic emotion
+        # Convert model output to clean emotion
         emotion = VOICE_EMOTION_MAP.get(emotion_code, emotion_code.lower())
-        confidence = min(max(confidence, 0.0), 1.0)  # clamp 0-1
 
-        # Cleanup temp file
-        if os.path.exists(tmp_file):
-            os.remove(tmp_file)
+        # remove temp file after inference
+        import os
+        if os.path.exists(filename):
+            os.remove(filename)
 
-        return {"emotion": emotion, "confidence": round(confidence, 2)}
+        return {
+            "emotion": emotion,   # always clean (happy, sad, angry etc.)
+            "confidence": round(confidence, 2)
+        }
 
     except Exception as e:
-        print(f"DEBUG Voice prediction failed: {e}")
-        return {"emotion": "neutral", "confidence": 0.0}
+        return {"error": str(e)}
 # ==========================================
-# MULTIMODAL FUSION (IMPROVED WPR-14)
+# MULTIMODAL FUSION (UPDATED - WPR-14)
 # ==========================================
 
 @app.post("/fusion")
 async def multimodal_fusion(data: FusionInput):
-    """
-    Combines text, face, and voice emotions using confidence-weighted voting.
-    Tie-breakers handled by priority: voice > face > text
-    """
 
-    import numpy as np
+    weighted_scores = {}
+    modality_count = 0
 
-    # Priority for tie-breaker when confidences are similar
-    PRIORITY_ORDER = ["voice", "face", "text"]
-
-    # Collect inputs as (emotion, confidence, modality)
     inputs = [
-        (data.text_emotion, float(data.text_confidence or 0.0), "text"),
-        (data.face_emotion, float(data.face_confidence or 0.0), "face"),
-        (data.voice_emotion, float(data.voice_confidence or 0.0), "voice")
+        (data.text_emotion, data.text_confidence),
+        (data.face_emotion, data.face_confidence),
+        (data.voice_emotion, data.voice_confidence)
     ]
 
-    # Remove None emotions
-    inputs = [(e, c, m) for e, c, m in inputs if e]
+    for emotion, confidence in inputs:
 
-    if not inputs:
-        return {"final_emotion": "neutral", "overall_confidence": 0.0}
+        if emotion and confidence is not None:
+            modality_count += 1
+            weighted_scores[emotion] = weighted_scores.get(emotion, 0) + confidence
 
-    # Weighted score aggregation
-    weighted_scores = {}
-    for emotion, confidence, modality in inputs:
-        weighted_scores[emotion] = weighted_scores.get(emotion, 0.0) + confidence
+    if not weighted_scores:
+        return {
+            "final_emotion": "neutral",
+            "overall_confidence": 0.0
+        }
 
-    # Find max weighted score
-    max_score = max(weighted_scores.values())
-    top_emotions = [emo for emo, score in weighted_scores.items() if score == max_score]
+    final_emotion = max(weighted_scores, key=weighted_scores.get)
 
-    # Tie-breaker using modality priority
-    if len(top_emotions) > 1:
-        final_emotion = top_emotions[0]  # default
-        for priority in PRIORITY_ORDER:
-            for e, _, m in inputs:
-                if e in top_emotions and m == priority:
-                    final_emotion = e
-                    break
-            else:
-                continue
-            break
-    else:
-        final_emotion = top_emotions[0]
-
-    # Overall confidence: average of contributing modalities for final emotion
-    contributing_confidences = [c for e, c, _ in inputs if e == final_emotion]
-    overall_confidence = round(float(np.mean(contributing_confidences)), 2)
+    # divide by actual number of modalities used
+    overall_confidence = round(
+        weighted_scores[final_emotion] / modality_count, 2
+    )
 
     return {
         "final_emotion": final_emotion,
@@ -476,12 +448,20 @@ async def multimodal_fusion(data: FusionInput):
 @app.post("/save-log")
 async def save_log(log: MoodLog):
 
-    safe_user = (log.user or "").strip()
-    if not safe_user:
-        safe_user = "Guest"
+    print("\n🔥 SAVE LOG API HIT")
 
+    # ✅ Ensure correct file path
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(BASE_DIR, "mood_log.csv")
+
+    print("📂 Saving to:", file_path)
+
+    # ✅ Clean user
+    safe_user = (log.user or "").strip() or "Guest"
+
+    # ✅ Prepare entry
     new_entry = {
-        "timestamp": log.timestamp,
+        "timestamp": str(log.timestamp),   # FIXED
         "user": safe_user,
         "emotion": log.emotion,
         "confidence": log.confidence,
@@ -490,19 +470,38 @@ async def save_log(log: MoodLog):
         "platform": log.platform
     }
 
+    print("🆕 New Entry:", new_entry)
+
+    # ✅ Read existing CSV safely
     try:
-        df = pd.read_csv(MOOD_LOG_FILE, engine="python")
-    except Exception:
+        if os.path.exists(file_path):
+            df = pd.read_csv(file_path)
+            print("📊 Existing rows:", len(df))
+        else:
+            print("⚠️ File not found, creating new")
+            df = pd.DataFrame(columns=new_entry.keys())
+
+    except Exception as e:
+        print("❌ CSV READ ERROR:", e)
         df = pd.DataFrame(columns=new_entry.keys())
 
+    # ✅ Append new row
     df = pd.concat([df, pd.DataFrame([new_entry])], ignore_index=True)
     df = df.loc[:, ~df.columns.duplicated()]
 
-    with csv_lock:
-        df.to_csv(MOOD_LOG_FILE, index=False)
+    print("📊 Rows after insert:", len(df))
+
+    # ✅ Save CSV safely
+    try:
+        with csv_lock:
+            df.to_csv(file_path, index=False)
+        print("💾 CSV WRITE SUCCESS")
+
+    except Exception as e:
+        print("❌ CSV WRITE ERROR:", e)
+        return {"status": "error", "message": str(e)}
 
     return {"status": "saved"}
-
 # ==========================================
 # GET LOGS
 # ==========================================

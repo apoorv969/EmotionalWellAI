@@ -1,5 +1,5 @@
 # ------------------------------------------------------------
-# EmotionalWell AI 🌈 — WPR-11 REST Architecture Version
+# EmotionalWell AI 🌈
 # Developed by Apoorv Mittal
 # ------------------------------------------------------------
 
@@ -12,37 +12,10 @@ from datetime import datetime
 
 import librosa
 import librosa.display
+import numpy as np
 import matplotlib.pyplot as plt
 import io
-import soundfile as sf
 
-import torch
-import torchaudio
-from speechbrain.inference.classifiers import EncoderClassifier
-
-
-# ======================================
-# LOAD VOICE EMOTION MODEL (AI)
-# ======================================
-
-@st.cache_resource
-def load_voice_emotion_model():
-
-    try:
-        model = EncoderClassifier.from_hparams(
-            source="speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
-            savedir="tmp_emotion_model",
-            run_opts={"device": "cpu"}   # Force CPU for Streamlit stability
-        )
-
-        return model
-
-    except Exception as e:
-        st.error(f"Voice emotion model failed to load: {e}")
-        return None
-
-
-voice_emotion_model = load_voice_emotion_model()
 # ============================================================
 # 🌐 MULTILINGUAL SYSTEM (GLOBAL - WPR 11 Compatible)
 # ============================================================
@@ -226,15 +199,8 @@ st.sidebar.markdown("Developed by Apoorv Mittal © 2026")
 def standardize_confidence(conf):
     try:
         conf = float(conf)
-        # If confidence looks like a percentage (over 1), convert it
-        if conf > 1.0:
-            conf = conf / 100
-        if conf < 0:
-            conf = 0.0
-        if conf > 1:
-            conf = 1.0
-        return conf
-    except Exception:
+        return round(conf / 100, 3) if conf > 1 else round(conf, 3)
+    except:
         return 0.0
 
 def multimodal_decision_fusion(face=None, voice=None, text=None):
@@ -282,11 +248,8 @@ with tabs[0]:
                     result.get("confidence", 0)
                 )
 
-                selected_language = language
-
                 translated_emotion = EMOTION_TRANSLATIONS.get(
-                    selected_language,
-                    EMOTION_TRANSLATIONS["English"]
+                    language, {}
                 ).get(emotion, emotion)
 
                 st.success(
@@ -412,16 +375,11 @@ with tabs[1]:
             except Exception as e:
                 st.error(f"API failed: {e}")
 # ======================================
-# TAB 2: MULTIMODAL EMOTION DETECTION 🧩 (with translation display)
+# TAB 2: MULTIMODAL EMOTION DETECTION 🧩 (FINAL CLEAN VERSION)
 # ======================================
 
-import pandas as pd
-import plotly.express as px
-import requests
-import time
-import os
-
 with tabs[2]:
+
     st.header(f"🧩 {t('multimodal_emotion')}")
 
     cam = st.camera_input("Capture Face", key="mm_face")
@@ -435,140 +393,133 @@ with tabs[2]:
         face_data = None
         text_data = None
         voice_data = None
-        translated_text_display = None
-
-        # =============================
-        # TEXT API
-        # =============================
-        if text_input and text_input.strip():
-            try:
-                r = requests.post(TEXT_API, json={"text": text_input})
-                if r.status_code == 200:
-                    text_data = r.json()
-                    st.write(f"DEBUG Text API result: {text_data}")
-                    # Save translated text for UI display
-                    translated_text_display = text_data.get("translated_text", text_input)
-                else:
-                    st.warning(f"Text API returned status {r.status_code}")
-            except Exception as e:
-                st.warning(f"Text API failed: {e}")
-
-        # =============================
-        # VOICE API
-        # =============================
-        if voice_file:
-            try:
-                files = {"file": (voice_file.name, voice_file.getvalue(), voice_file.type)}
-                r = requests.post(VOICE_API, files=files)
-                if r.status_code == 200:
-                    voice_data = r.json()
-                    st.write(f"DEBUG Voice API result: {voice_data}")
-                else:
-                    st.warning(f"Voice API returned status {r.status_code}")
-            except Exception as e:
-                st.warning(f"Voice API failed: {e}")
 
         # =============================
         # FACE API
         # =============================
-        if cam:
-            try:
+        try:
+            if cam is not None:
                 files = {"file": cam.getvalue()}
                 r = requests.post(FACE_API, files=files)
+
                 if r.status_code == 200:
-                    face_data = r.json()
-                    st.write(f"DEBUG Face API result: {face_data}")
+                    result = r.json()
+                    face_data = {
+                        "emotion": result.get("emotion", "neutral"),
+                        "confidence": standardize_confidence(result.get("confidence", 0))
+                    }
                 else:
-                    st.warning(f"Face API returned status {r.status_code}")
-            except Exception as e:
-                st.warning(f"Face API failed: {e}")
+                    st.warning("Face API error.")
+        except Exception:
+            st.warning("Face API failed.")
 
         # =============================
-        # NORMALIZE EMOTIONS
+        # TEXT API
         # =============================
-        def normalize_emotion(data):
-            if not data:
-                return None, 0.0
-            emotion = data.get("emotion", "neutral")
-            if isinstance(emotion, list):
-                emotion = emotion[0] if emotion else "neutral"
-            confidence = float(data.get("confidence", 0.0))
-            confidence = min(max(confidence, 0.0), 1.0)  # clamp 0-1
-            return str(emotion), confidence
+        try:
+            if text_input and text_input.strip():
+                r = requests.post(TEXT_API, json={"text": text_input})
 
-        text_emotion, text_conf = normalize_emotion(text_data)
-        face_emotion, face_conf = normalize_emotion(face_data)
-        voice_emotion, voice_conf = normalize_emotion(voice_data)
-
-        st.write(f"DEBUG Text: {text_emotion} ({text_conf})")
-        st.write(f"DEBUG Face: {face_emotion} ({face_conf})")
-        st.write(f"DEBUG Voice: {voice_emotion} ({voice_conf})")
+                if r.status_code == 200:
+                    result = r.json()
+                    text_data = {
+                        "emotion": result.get("emotion", "neutral"),
+                        "confidence": standardize_confidence(result.get("confidence", 0))
+                    }
+                else:
+                    st.warning("Text API error.")
+        except Exception:
+            st.warning("Text API failed.")
 
         # =============================
-        # SHOW ORIGINAL AND TRANSLATED TEXT
+        # VOICE API
         # =============================
-        if text_input:
-            st.subheader("📝 Text Overview")
-            st.markdown(f"**Original:** {text_input}")
-            if translated_text_display and translated_text_display != text_input:
-                st.markdown(f"**Translated to English:** {translated_text_display}")
+        try:
+            if voice_file is not None:
+                files = {
+                    "file": (
+                        voice_file.name,
+                        voice_file.getvalue(),
+                        voice_file.type
+                    )
+                }
+
+                r = requests.post(VOICE_API, files=files)
+
+                if r.status_code == 200:
+                    result = r.json()
+
+                    voice_emotion = result.get("emotion", "neutral")
+                    if isinstance(voice_emotion, list):
+                        voice_emotion = voice_emotion[0] if voice_emotion else "neutral"
+
+                    voice_data = {
+                        "emotion": voice_emotion,
+                        "confidence": standardize_confidence(result.get("confidence", 0))
+                    }
+                else:
+                    st.warning("Voice API error.")
+
+        except Exception:
+            st.warning("Voice API failed.")
+
+        # =============================
+        # NO INPUT CHECK
+        # =============================
+        if not face_data and not text_data and not voice_data:
+            st.warning("Please provide at least one input.")
+            st.stop()
 
         # =============================
         # MODALITY SUMMARY
         # =============================
+        st.markdown("---")
+        st.subheader("📊 Modality Analysis Summary")
+
         summary_rows = []
-        if face_emotion:
-            summary_rows.append({
-                "Modality": "Face",
-                "Emotion": face_emotion.title(),
-                "Confidence (%)": round(face_conf*100,1)
-            })
-        if text_emotion:
-            summary_rows.append({
-                "Modality": "Text",
-                "Emotion": text_emotion.title(),
-                "Confidence (%)": round(text_conf*100,1)
-            })
-        if voice_emotion:
-            summary_rows.append({
-                "Modality": "Voice",
-                "Emotion": voice_emotion.title(),
-                "Confidence (%)": round(voice_conf*100,1)
-            })
 
-        if summary_rows:
-            df_summary = pd.DataFrame(summary_rows)
-            st.subheader("📊 Modality Analysis Summary")
-            st.dataframe(df_summary, use_container_width=True)
+        def add_row(name, data):
+            if data:
+                emotion = data["emotion"]
+                translated = EMOTION_TRANSLATIONS.get(language, {}).get(
+                    emotion, emotion
+                )
 
-            # Bar chart
-            st.subheader("📈 Confidence Comparison (Bar Chart)")
-            fig_bar = px.bar(
-                df_summary,
-                x="Modality",
-                y="Confidence (%)",
-                color="Emotion",
-                text="Emotion",
-                color_discrete_sequence=px.colors.qualitative.Vivid
-            )
-            st.plotly_chart(fig_bar, use_container_width=True)
+                summary_rows.append({
+                    "Modality": name,
+                    "Emotion": translated,
+                    "Confidence (%)": round(data["confidence"] * 100, 1)
+                })
 
-            # Pie chart
-            st.subheader("🥧 Confidence Distribution (Pie Chart)")
-            fig_pie = px.pie(
-                df_summary,
-                names="Modality",
-                values="Confidence (%)",
-                color="Emotion",
-                color_discrete_sequence=px.colors.qualitative.Set3,
-                hole=0.4
-            )
-            st.plotly_chart(fig_pie, use_container_width=True)
-        else:
-            st.info("No modality data available.")
+        add_row("Face", face_data)
+        add_row("Text", text_data)
+        add_row("Voice", voice_data)
+
+        df_summary = pd.DataFrame(summary_rows)
+        st.dataframe(df_summary, use_container_width=True)
 
         # =============================
-        # MULTIMODAL FUSION
+        # CONFIDENCE CHART
+        # =============================
+        st.subheader("📈 Confidence Comparison")
+
+        chart_data = df_summary.set_index("Modality")["Confidence (%)"]
+        st.bar_chart(chart_data)
+
+        # =============================
+        # NORMALIZATION
+        # =============================
+        def normalize(data):
+            if not data:
+                return None, 0.0
+            return data["emotion"], float(data["confidence"])
+
+        text_emotion, text_conf = normalize(text_data)
+        face_emotion, face_conf = normalize(face_data)
+        voice_emotion, voice_conf = normalize(voice_data)
+
+        # =============================
+        # FUSION API
         # =============================
         fusion_payload = {
             "text_emotion": text_emotion,
@@ -581,32 +532,59 @@ with tabs[2]:
 
         try:
             fusion_response = requests.post(FUSION_API, json=fusion_payload)
+
             if fusion_response.status_code == 200:
                 fusion_result = fusion_response.json()
                 final_emotion = fusion_result.get("final_emotion", "neutral")
-                final_confidence = fusion_result.get("overall_confidence", 0.0)
+                final_confidence = float(
+                    fusion_result.get("overall_confidence", 0.0)
+                )
             else:
-                st.warning(f"Fusion API error.\nStatus: {fusion_response.status_code}\nResponse: {fusion_response.text}")
                 final_emotion = "neutral"
                 final_confidence = 0.0
-        except requests.exceptions.RequestException as e:
-            st.error(f"Fusion API connection error: {e}")
+
+        except Exception:
             final_emotion = "neutral"
             final_confidence = 0.0
 
-        st.write(f"DEBUG Final Emotion: {final_emotion} ({final_confidence})")
+        # =============================
+        # FINAL RESULT DISPLAY (FIXED)
+        # =============================
+        st.markdown("---")
+        st.subheader("🎯 Final Multimodal Emotion")
+
+        translated_final = EMOTION_TRANSLATIONS.get(language, {}).get(
+            final_emotion, final_emotion
+        )
+
+        st.success(
+            f"{translated_final} {EMOJI.get(final_emotion, '')} "
+            f"({final_confidence * 100:.1f}%)"
+        )
 
         # =============================
-        # FINAL EMOTION PIE CHART
+        # SAVE TO BACKEND
         # =============================
-        st.subheader("🎯 Final Emotion Overview")
-        fig_final = px.pie(
-            names=[final_emotion],
-            values=[final_confidence*100],
-            hole=0.3,
-            color_discrete_sequence=px.colors.qualitative.Pastel
-        )
-        st.plotly_chart(fig_final, use_container_width=True)
+        log_payload = {
+            "timestamp": datetime.now().isoformat(),
+            "user": user_name if user_name else "Guest",
+            "emotion": final_emotion,
+            "confidence": float(final_confidence),
+            "text": text_input.strip() if text_input else "",
+            "source": "multimodal",
+            "platform": "streamlit"
+        }
+
+        try:
+            save_response = requests.post(SAVE_API, json=log_payload)
+
+            if save_response.status_code == 200:
+                st.success("Multimodal mood saved successfully ✅")
+            else:
+                st.warning("Emotion detected but saving failed.")
+
+        except Exception:
+            st.error("Backend connection error.")
 # -----------------------------
 # Tab 3: Image Emotion
 # -----------------------------
