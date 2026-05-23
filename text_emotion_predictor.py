@@ -1,28 +1,23 @@
-# modules/text_emotion_predictor.py
-import os
-import warnings
 import joblib
-from sklearn.dummy import DummyClassifier
+import os
 
-# Path to your trained model
-MODEL_PATH = os.path.join("models", "text_emotion_model.pkl")
+MODEL_PATH = os.path.join("models", "text_emotion_model_multilingual.pkl")
+VECT_PATH = os.path.join("models", "vectorizer.pkl")
 
-# Load model safely
-if os.path.exists(MODEL_PATH):
-    try:
-        model = joblib.load(MODEL_PATH)
-    except Exception as e:
-        warnings.warn(f"Failed to load model at {MODEL_PATH}: {e}. Using dummy classifier instead.")
-        model = DummyClassifier(strategy="uniform")
-        model.fit([[0]], [0])
+model = None
+vectorizer = None
+
+if os.path.exists(MODEL_PATH) and os.path.exists(VECT_PATH):
+    model = joblib.load(MODEL_PATH)
+    vectorizer = joblib.load(VECT_PATH)
 else:
-    warnings.warn(f"Model file not found at {MODEL_PATH}. Using dummy classifier instead.")
-    model = DummyClassifier(strategy="uniform")
-    model.fit([[0]], [0])
+    print("⚠️ Warning: Model or vectorizer not found. Text emotion detection will not work.")
 
-def predict_emotion(text_features):
-    """
-    Predict the emotion label using the loaded model.
-    text_features: preprocessed/text-vectorized data.
-    """
-    return model.predict([text_features])[0]
+def predict_emotion(text):
+    if model is None or vectorizer is None:
+        return "neutral", 0.0
+
+    vec = vectorizer.transform([text])
+    emotion = model.predict(vec)[0]
+    confidence = max(model.predict_proba(vec)[0]) * 100
+    return emotion, round(confidence, 2)
