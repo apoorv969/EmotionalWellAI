@@ -1,0 +1,64 @@
+name: emotional_wellai_app
+description: EmotionalWell AI Flutter App
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # HTTP requests to FastAPI backend
+  http: ^1.2.1
+
+  
+  
+  dio: ^5.9.2 
+
+  # Image capture / gallery selection
+  image_picker: ^1.1.1
+  image: ^4.0.0
+
+  # File selection (voice upload etc.)
+  file_picker: ^11.0.2
+
+  # Camera access for live face capture (works on mobile & web)
+  camera: ^0.12.0+1
+
+  # Voice recording
+  record: ^6.2.0
+
+  # Permissions (camera / microphone)
+  flutter_sound: ^9.28.0
+
+  # Charts for Moodboard analytics
+  intl: ^0.20.2  # Add this line
+  fl_chart: ^1.2.0
+
+  # Icons
+  cupertino_icons: ^1.0.6
+
+  # Web camera support (only required for Flutter web)
+  universal_html: ^2.0.10
+
+  
+  path_provider: ^2.1.2
+  permission_handler: ^12.0.1
+  
+  url_launcher: ^6.3.0
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+dependency_overrides:
+  objective_c: 9.1.0
